@@ -1,0 +1,13 @@
+{
+    "status": {
+        "code": 1,
+        "message": "Procesado con éxito"
+    },
+    "data": [
+        {
+            "id": 1,
+            "title": "Pregunta de prueba",
+            "content": "Esta es una pregunta"
+        }
+    ]
+}

@@ -1,0 +1,40 @@
+{
+    "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9hcHBjYXJuZXQudW5pbm9ydGUuZWR1LmNvXC9hcHBcL2FwaVwvbG9naW4iLCJpYXQiOjE1ODg3NDAzMjEsImV4cCI6MTU4ODc0MzkyMSwibmJmIjoxNTg4NzQwMzIxLCJqdGkiOiJtTEVQRkdYVWtjS21zVTlPIiwic3ViIjoxLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.I-f9No7SampxnRWDn4FNzMDXSq3xn7dEX3zWSBwSMgk",
+    "expires_in": 1604292321,
+    "registerPhone": {
+        "status": {
+            "code": 1,
+            "message": "Registro de dispositivo"
+        },
+        "data": {
+            "user_id": 3,
+            "user_email_un": null,
+            "user_email_ext": "medm89@gmail.com",
+            "user_uid": "123456",
+            "user_phone_model": "google",
+            "user_phone_brand": "AOSP on IA Emulator",
+            "user_last_access": null,
+            "updated_at": "2020-05-06 04:09:20.840",
+            "created_at": "2020-05-06 04:09:20.840"
+        }
+    },
+    "permission": {
+        "status": {
+            "code": 1,
+            "message": "Permisos Obtenidos"
+        },
+        "data": {
+            "id": "200013284",
+            "documento": "1140819289",
+            "nombre": "MARTIN EMILIO DIAZ MORA",
+            "foto": "...",
+            "perfilesnew": [
+                {
+                    "name": "EG",
+                    "titulo": "Egresado",
+                    "color": "E0AF28"
+                }
+            ]
+        }
+    }
+}

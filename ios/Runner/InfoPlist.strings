@@ -1,0 +1,12 @@
+/* 
+  InfoPlist.strings
+  Runner
+
+  Created by Fabi Diartt on 3/05/20.
+  Copyright © 2020 The Chromium Authors. All rights reserved.
+*/
+"CFBundleDisplayName" = "ID Uninorte";
+"NSCameraUsageDescription" = "Esto te permitirá tomar fotos desde la cámara para cambiar tu foto del carnet.";
+"NSFaceIDUsageDescription" = "Esto te permitirá acceder de una forma rápida y segura.";
+"NSMicrophoneUsageDescription" = "Esto te permitirá grabar audio.";
+"NSPhotoLibraryUsageDescription" = "Esto te permitirá seleccionar imágenes desde la galería para cambiar tu foto del carnet.";

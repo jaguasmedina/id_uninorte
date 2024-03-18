@@ -1,0 +1,33 @@
+{
+    "meta": {
+        "prefix": "immeta",
+        "body": [
+            "import 'package:meta/meta.dart';"
+        ],
+        "description": "import meta package"
+    },
+    "Provider": {
+        "prefix": "prov",
+        "body": [
+            "Provider.of<$1>(context)$2"
+        ],
+        "description": "Provider of context"
+    },
+    "utils": {
+        "prefix": "imutils",
+        "body": [
+            "import 'package:identidaddigital/core/utils/utils.dart' as utils;"
+        ],
+        "description": "import utils"
+    },
+    "anonymous_route": {
+		"prefix": "anroute",
+		"body": [
+			"/// Anonymous route for [$1].",
+			"static Route<void> route() {",
+			"   return MaterialPageRoute(builder: (_) => $1());",
+			"}"
+		],
+		"description": "Generate static function for anonymous route"
+	},
+}

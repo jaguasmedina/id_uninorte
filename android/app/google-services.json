@@ -1,0 +1,83 @@
+{
+  "project_info": {
+    "project_number": "59238513503",
+    "firebase_url": "https://app-carnet-digital.firebaseio.com",
+    "project_id": "app-carnet-digital",
+    "storage_bucket": "app-carnet-digital.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:59238513503:android:0a8ea0bb84bd51df4dd4ea",
+        "android_client_info": {
+          "package_name": "com.identidaddigital"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "59238513503-8v9peucnt6u4826mu84q672qluboto7c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVA2iCVAvKIYhMRMWPWRcbQNCgYf2slnI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "59238513503-8v9peucnt6u4826mu84q672qluboto7c.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "59238513503-di64ot5hj3dooba00met19ieu95scm40.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.identidaddigital"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:59238513503:android:38c0725ba62474e24dd4ea",
+        "android_client_info": {
+          "package_name": "com.identidaddigital.qa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "59238513503-8v9peucnt6u4826mu84q672qluboto7c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVA2iCVAvKIYhMRMWPWRcbQNCgYf2slnI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "59238513503-8v9peucnt6u4826mu84q672qluboto7c.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "59238513503-di64ot5hj3dooba00met19ieu95scm40.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.identidaddigital"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

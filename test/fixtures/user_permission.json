@@ -1,0 +1,13 @@
+{
+    "id": "200010101",
+    "documento": "10101010",
+    "nombre": "TEST NAME",
+    "foto": "image",
+    "perfilesnew": [
+        {
+            "name": "EG",
+            "titulo": "Egresado",
+            "color": "E0AF28"
+        }
+    ]
+}

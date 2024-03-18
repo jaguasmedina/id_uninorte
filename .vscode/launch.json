@@ -1,0 +1,43 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Flutter debug dev",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/main_dev.dart",
+            "flutterMode": "debug",
+            "args": ["--flavor", "dev"]
+        },
+        {
+            "name": "Flutter profile dev",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/main_dev.dart",
+            "flutterMode": "profile",
+            "args": ["--flavor", "dev"]
+        },
+        {
+            "name": "Flutter debug prod",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/main_prod.dart",
+            "flutterMode": "debug",
+            "args": ["--flavor", "prod"]
+        },
+        {
+            "name": "Flutter profile prod",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/main_prod.dart",
+            "flutterMode": "profile",
+            "args": ["--flavor", "prod"]
+        },
+        {
+            "name": "Run all Tests",
+            "type": "dart",
+            "request": "launch",
+            "program": "test/"
+        }
+    ]
+}

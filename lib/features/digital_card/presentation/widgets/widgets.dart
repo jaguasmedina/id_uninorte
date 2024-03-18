@@ -1,0 +1,9 @@
+export 'package:identidaddigital/features/digital_card/presentation/widgets/animation_notifier.dart';
+export 'package:identidaddigital/features/digital_card/presentation/widgets/back_view.dart';
+export 'package:identidaddigital/features/digital_card/presentation/widgets/bottom_bar.dart';
+export 'package:identidaddigital/features/digital_card/presentation/widgets/carnet_container.dart';
+export 'package:identidaddigital/features/digital_card/presentation/widgets/carnet_widget.dart';
+export 'package:identidaddigital/features/digital_card/presentation/widgets/diagonal_painter.dart';
+export 'package:identidaddigital/features/digital_card/presentation/widgets/front_view.dart';
+export 'package:identidaddigital/features/digital_card/presentation/widgets/hologram_box_v2.dart';
+export 'package:identidaddigital/features/digital_card/presentation/widgets/hologram_box.dart';

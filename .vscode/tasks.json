@@ -1,0 +1,47 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "shell",
+            "command": "${config:dart.flutterSdkPath}/bin/flutter packages pub run build_runner build --delete-conflicting-outputs",
+            "group": "build",
+            "label": "Flutter build project",
+            "problemMatcher": []
+        },
+        {
+            "type": "shell",
+            "command": "${config:dart.flutterSdkPath}/bin/flutter build apk --flavor qa -t lib/main_prod.dart",
+            "group": "build",
+            "label": "Flutter build qa apk",
+            "problemMatcher": []
+        },
+        {
+            "type": "shell",
+            "command": "${config:dart.flutterSdkPath}/bin/flutter build apk --flavor prod -t lib/main_prod.dart",
+            "group": "build",
+            "label": "Flutter build production apk",
+            "problemMatcher": []
+        },
+        {
+            "type": "shell",
+            "command": "${config:dart.flutterSdkPath}/bin/flutter build appbundle --flavor prod -t lib/main_prod.dart",
+            "group": "build",
+            "label": "Flutter build production appbundle",
+            "problemMatcher": []
+        },
+        {
+            "type": "shell",
+            "command": "${config:dart.flutterSdkPath}/bin/flutter build ipa -t lib/main_prod.dart",
+            "group": "build",
+            "label": "Flutter build production ios",
+            "problemMatcher": []
+        },
+        {
+            "type": "shell",
+            "command": "${config:dart.flutterSdkPath}/bin/flutter clean",
+            "group": "build",
+            "label": "Flutter clean project",
+            "problemMatcher": []
+        }
+    ]
+}
