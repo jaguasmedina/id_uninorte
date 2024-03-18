@@ -1,8 +1,6 @@
 # Identidad Digital
 
-Starting point of a Flutter application.
-
-Ultima versión cargada: 1.0.14+42
+#### Ultima versión cargada: 1.0.14+42
 
 ## Getting started
 
