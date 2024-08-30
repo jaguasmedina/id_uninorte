@@ -31,7 +31,8 @@ class DeviceModel extends Device {
     return DeviceModel(
       id: info.identifierForVendor,
       brand: info.model,
-      model: info.name,
+      // model: info.name, // <-- DeviceInfo.Name is a default value since iOS 16 https://developer.apple.com/documentation/bundleresources/entitlements/com_apple_developer_device-information_user-assigned-device-name
+      model: info.identifierForVendor,
       systemName: info.systemName,
       systemVersion: info.systemVersion,
     );

@@ -152,9 +152,8 @@ PODS:
     - Flutter
   - sensors (0.0.1):
     - Flutter
-  - shared_preferences_foundation (0.0.1):
+  - shared_preferences_ios (0.0.1):
     - Flutter
-    - FlutterMacOS
   - sqflite (0.0.2):
     - Flutter
     - FMDB (>= 2.7.5)
@@ -181,7 +180,7 @@ DEPENDENCIES:
   - screen_brightness_ios (from `.symlinks/plugins/screen_brightness_ios/ios`)
   - screenshot_callback (from `.symlinks/plugins/screenshot_callback/ios`)
   - sensors (from `.symlinks/plugins/sensors/ios`)
-  - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/ios`)
+  - shared_preferences_ios (from `.symlinks/plugins/shared_preferences_ios/ios`)
   - sqflite (from `.symlinks/plugins/sqflite/ios`)
   - store_redirect (from `.symlinks/plugins/store_redirect/ios`)
   - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
@@ -239,8 +238,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/screenshot_callback/ios"
   sensors:
     :path: ".symlinks/plugins/sensors/ios"
-  shared_preferences_foundation:
-    :path: ".symlinks/plugins/shared_preferences_foundation/ios"
+  shared_preferences_ios:
+    :path: ".symlinks/plugins/shared_preferences_ios/ios"
   sqflite:
     :path: ".symlinks/plugins/sqflite/ios"
   store_redirect:
@@ -281,10 +280,10 @@ SPEC CHECKSUMS:
   screen_brightness_ios: dd110ebfe9602013ea863d59770a9192ebbb7ac7
   screenshot_callback: b173e7f4bd8d2ef14a9a5e5a77c0ac6a47578608
   sensors: 84eb7a30e47a649e4172b71d6e81be614c280336
-  shared_preferences_foundation: 297b3ebca31b34ec92be11acd7fb0ba932c822ca
+  shared_preferences_ios: 548a61f8053b9b8a49ac19c1ffbc8b92c50d68ad
   sqflite: 6d358c025f5b867b29ed92fc697fd34924e11904
   store_redirect: 2977747cf81689a39bd62c248c2deacb7a0d131e
-  url_launcher_ios: ae1517e5e344f5544fb090b079e11f399dfbe4d2
+  url_launcher_ios: 839c58cdb4279282219f5e248c3321761ff3c4de
 
 PODFILE CHECKSUM: 9777f4fdb6c1f2c2436ebcddc2a885d69ce2cacf
 
