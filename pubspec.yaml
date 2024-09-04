@@ -1,6 +1,6 @@
 name: identidaddigital
 description: Identidad Digital.
-version: 1.0.14+42
+version: 1.0.15+43
 
 environment:
   sdk: ">=2.8.0 <3.0.0"
