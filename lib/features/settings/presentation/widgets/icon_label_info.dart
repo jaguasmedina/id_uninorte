@@ -6,14 +6,14 @@ class IconLabelInfo extends StatelessWidget {
   final IconData icon;
   final String title;
   final String label;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
   final EdgeInsetsGeometry iconPadding;
 
   const IconLabelInfo({
-    Key key,
-    @required this.icon,
-    @required this.title,
-    @required this.label,
+    Key? key,
+    required this.icon,
+    required this.title,
+    required this.label,
     this.onTap,
     this.iconPadding = EdgeInsets.zero,
   }) : super(key: key);
@@ -21,7 +21,7 @@ class IconLabelInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return NoFeedbackButton(
-      onTap: onTap,
+      onTap: onTap ?? () {},
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[

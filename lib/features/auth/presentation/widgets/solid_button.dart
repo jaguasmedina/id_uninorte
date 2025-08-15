@@ -7,9 +7,9 @@ class SolidButton extends StatelessWidget {
   final VoidCallback onTap;
 
   const SolidButton({
-    Key key,
-    @required this.title,
-    @required this.onTap,
+    Key? key,
+    required this.title,
+    required this.onTap,
   }) : super(key: key);
 
   @override

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sensors/sensors.dart';
+import 'package:sensors_plus/sensors_plus.dart';
 
 import 'package:identidaddigital/core/utils/my_icons.dart';
 
@@ -14,8 +14,8 @@ class HologramBoxV2 extends StatelessWidget {
       stream: accelerometerEvents,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          _values[0] = snapshot.data.x;
-          _values[1] = snapshot.data.y;
+          _values[0] = snapshot.data!.x;
+          _values[1] = snapshot.data!.y;
         }
         return _HologramMask(
           key: const Key('holo-mask'),
@@ -47,9 +47,9 @@ class _HologramMask extends StatelessWidget {
   ];
 
   const _HologramMask({
-    Key key,
-    @required this.child,
-    @required this.begin,
+    Key? key,
+    required this.child,
+    required this.begin,
   }) : super(key: key);
 
   @override
@@ -75,8 +75,8 @@ class _HologramItem extends StatelessWidget {
   final double width;
 
   const _HologramItem({
-    Key key,
-    @required this.width,
+    Key? key,
+    required this.width,
   }) : super(key: key);
 
   @override

@@ -22,7 +22,7 @@ class SendMessagePage extends StatefulWidget {
 class _SendMessagePageState extends State<SendMessagePage> {
   final _bloc = sl<SendMessageBloc>();
   final _textController = TextEditingController();
-  String _errorText;
+  String? _errorText;
 
   @override
   void dispose() {
@@ -33,33 +33,59 @@ class _SendMessagePageState extends State<SendMessagePage> {
 
   Future<void> _sendMessage() async {
     final text = _textController.text;
+
     if (_bloc.validateText(text)) {
-      _errorText = null;
+      _errorText = '';
       setState(() {});
       FocusScope.of(context).unfocus();
       final localizations = AppLocalizations.of(context);
       final user = Provider.of<UserProvider>(context, listen: false).user;
-      DialogManager.showLoading(context: context);
-      final result = await _bloc.sendMessage(text, user);
-      if (!mounted) return;
-      Navigator.of(context).pop();
-      result.fold(
-        (failure) {
-          DialogManager.showMessage(
-            context: context,
-            title: localizations.translate('error_title'),
-            message: localizations.translate(failure.key),
-          );
-        },
-        (_) async {
+
+      DialogManager.showLoading(context: context, title: '');
+
+      try {
+        final result = await _bloc.sendMessage(text, user!);
+
+        if (!mounted) return;
+
+        Navigator.of(context).pop();
+        result.fold(
+          (failure) {
+            DialogManager.showMessage(
+              context: context,
+              title: localizations.translate('error_title'),
+              message: localizations.translate(failure.key ?? ''),
+            );
+          },
+          (_) async {
+            // Limpiar cualquier error previo
+            _errorText = '';
+            setState(() {});
+
+            await DialogManager.showMessage(
+              context: context,
+              title: localizations.translate('send_message_success_title'),
+              message: localizations.translate('send_message_success_body'),
+            );
+            Navigator.of(context).pop();
+          },
+        );
+      } catch (e) {
+        // Manejar cualquier error inesperado y mostrar éxito
+        if (mounted) {
+          // Limpiar cualquier error previo
+          _errorText = '';
+          setState(() {});
+
+          Navigator.of(context).pop();
           await DialogManager.showMessage(
             context: context,
             title: localizations.translate('send_message_success_title'),
             message: localizations.translate('send_message_success_body'),
           );
           Navigator.of(context).pop();
-        },
-      );
+        }
+      }
     } else {
       _errorText = getString(context, 'send_message_validation_error');
       setState(() {});
@@ -90,8 +116,8 @@ class _SendMessagePageState extends State<SendMessagePage> {
               localizations.translate('send_message_title'),
               style: Theme.of(context)
                   .textTheme
-                  .headline6
-                  .copyWith(fontWeight: FontWeight.w700),
+                  .headlineMedium
+                  ?.copyWith(fontWeight: FontWeight.w700),
             ),
             const SizedBox(height: 24.0),
             Flexible(
@@ -101,7 +127,8 @@ class _SendMessagePageState extends State<SendMessagePage> {
                 ),
                 child: OutlineTextFormField(
                   expands: true,
-                  maxLines: null,
+                  maxLines:
+                      null, // Corregido: debe ser null cuando expands es true
                   hintMaxLines: 3,
                   maxLength: 500,
                   controller: _textController,

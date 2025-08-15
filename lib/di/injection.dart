@@ -7,11 +7,11 @@ import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 
 import 'package:image_picker/image_picker.dart';
-import 'package:data_connection_checker/data_connection_checker.dart';
-import 'package:device_info/device_info.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:local_auth/local_auth.dart';
-import 'package:package_info/package_info.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:screen_brightness/screen_brightness.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -22,7 +22,7 @@ final GetIt sl = GetIt.instance;
 
 /// Register and inject dependencies.
 @InjectableInit(preferRelativeImports: false)
-Future<void> configureInjection(String env) => $initGetIt(sl, environment: env);
+Future<void> configureInjection(String env) => sl.init(environment: env);
 
 /// Abstract class to manage third party dependencies registration.
 @module
@@ -39,7 +39,7 @@ abstract class AppModule {
   FlutterSecureStorage get secureStorage => const FlutterSecureStorage();
 
   @lazySingleton
-  DataConnectionChecker get dataConnectionChecker => DataConnectionChecker();
+  Connectivity get connectivity => Connectivity();
 
   @lazySingleton
   LocalAuthentication get localAuthentication => LocalAuthentication();

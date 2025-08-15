@@ -11,8 +11,8 @@ class CarnetInfoSlide extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
-          Column(
-            children: const <Widget>[
+          const Column(
+            children: <Widget>[
               SizedBox(
                 height: 90.0,
                 child: Image(
@@ -28,8 +28,8 @@ class CarnetInfoSlide extends StatelessWidget {
               ),
             ],
           ),
-          Column(
-            children: const <Widget>[
+          const Column(
+            children: <Widget>[
               SizedBox(
                 height: 80.0,
                 child: Image(
@@ -53,18 +53,19 @@ class CarnetInfoSlide extends StatelessWidget {
                   Icon(
                     Icons.chevron_left,
                     size: 50.0,
-                    color: Theme.of(context).accentColor,
+                    color: Theme.of(context).colorScheme.secondary,
                   ),
                   const Icon(Icons.remove, size: 50.0),
                   Icon(
                     Icons.chevron_right,
                     size: 50.0,
-                    color: Theme.of(context).accentColor,
+                    color: Theme.of(context).colorScheme.secondary,
                   ),
                 ],
               ),
               const SizedBox(height: 14.0),
               const BodyRichText(
+                key: Key('carnet_info_slide_3'),
                 children: [
                   TextSpan(text: 'Conoce todos tus\n'),
                   BoldTextSpan(text: 'perfiles activos.'),

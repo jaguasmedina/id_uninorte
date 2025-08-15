@@ -17,7 +17,10 @@ class AuthServiceImpl implements AuthService {
   final ApiClient client;
   final PreferencesDataSource preferences;
 
-  AuthServiceImpl(this.client, this.preferences,);
+  AuthServiceImpl(
+    this.client,
+    this.preferences,
+  );
 
   @override
   Future<Tuple2<UserModel, String>> login(LoginRequest request) async {
@@ -26,7 +29,6 @@ class AuthServiceImpl implements AuthService {
       body: request.toMap(),
     );
     if (response.status.code == -1) {
-
       ///Get Token to Unlink Device
       final ApiResponse<Map> response = await client.post(
         ApiRoutes.loginPortal,
@@ -34,7 +36,7 @@ class AuthServiceImpl implements AuthService {
       );
 
       ///Set Email for Unlink Device
-      preferences.userEmail = request.credentials.username;
+      preferences.userEmail = request.credentials.username ?? '';
       preferences.authToken = response.data['access_token'];
 
       throw DeviceAlreadyInUseException();
@@ -44,7 +46,8 @@ class AuthServiceImpl implements AuthService {
       throw AuthRequestException();
     } else if (response.isSuccessful) {
       final String accessToken = response.data['access_token'];
-      final userModel = UserModel.fromMap(response.data);
+      final userModel =
+          UserModel.fromMap(Map<String, dynamic>.from(response.data));
       return tuple2(userModel, accessToken);
     } else {
       throw ServerException();

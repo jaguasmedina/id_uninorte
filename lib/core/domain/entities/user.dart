@@ -1,8 +1,8 @@
-import 'package:meta/meta.dart';
+
 import 'package:equatable/equatable.dart';
 
-import 'package:identidaddigital/core/domain/entities/user_profile.dart';
 import 'package:identidaddigital/core/domain/entities/user_permission.dart';
+import 'package:identidaddigital/core/domain/entities/user_profile.dart';
 
 class User extends Equatable {
   final String deviceUID;
@@ -10,16 +10,16 @@ class User extends Equatable {
   final String deviceModel;
   final String emailExt;
   final String emailUN;
-  final String lastAccess;
+  final String? lastAccess;
   final UserPermission permission;
 
   const User({
-    @required this.permission,
-    @required this.deviceUID,
-    @required this.deviceBrand,
-    @required this.deviceModel,
-    @required this.emailExt,
-    @required this.emailUN,
+    required this.permission,
+    required this.deviceUID,
+    required this.deviceBrand,
+    required this.deviceModel,
+    required this.emailExt,
+    required this.emailUN,
     this.lastAccess,
   });
 
@@ -29,7 +29,7 @@ class User extends Equatable {
   }
 
   @override
-  List<Object> get props => [permission];
+  List<Object?> get props => [permission];
 
   /// Full user's name.
   String get name => permission.name;
@@ -59,13 +59,13 @@ class User extends Equatable {
 
   /// Creates a copy of this [User].
   User copyWith({
-    String deviceUID,
-    String deviceBrand,
-    String deviceModel,
-    String emailExt,
-    String emailUN,
-    String lastAccess,
-    UserPermission permission,
+    String? deviceUID,
+    String? deviceBrand,
+    String? deviceModel,
+    String? emailExt,
+    String? emailUN,
+    String? lastAccess,
+    UserPermission? permission,
   }) {
     return User(
       deviceUID: deviceUID ?? this.deviceUID,

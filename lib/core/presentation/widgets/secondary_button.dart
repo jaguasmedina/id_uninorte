@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 class CustomOutlinedButton extends StatelessWidget {
-  final Widget child;
-  final VoidCallback onPressed;
+  final Widget? child;
+  final VoidCallback? onPressed;
 
   const CustomOutlinedButton({
-    Key key,
+    Key? key,
     this.child,
     this.onPressed,
   }) : super(key: key);
@@ -15,7 +15,7 @@ class CustomOutlinedButton extends StatelessWidget {
     return OutlinedButton(
       onPressed: onPressed,
       style: OutlinedButton.styleFrom(
-        primary: Colors.black,
+        foregroundColor: Colors.black,
         side: const BorderSide(width: 2.0),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8.0),
@@ -28,18 +28,18 @@ class CustomOutlinedButton extends StatelessWidget {
 
 class SecondaryButton extends StatelessWidget {
   final String title;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
 
   const SecondaryButton({
-    Key key,
-    @required this.title,
+    Key? key,
+    required this.title,
     this.onPressed,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return CustomOutlinedButton(
-      onPressed: onPressed,
+      onPressed: onPressed ?? () {},
       child: FittedBox(
         child: Text(
           title.toUpperCase(),

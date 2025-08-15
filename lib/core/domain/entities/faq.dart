@@ -1,9 +1,9 @@
 import 'package:equatable/equatable.dart';
 
 class Faq extends Equatable {
-  final int id;
-  final String title;
-  final String content;
+  final int? id;
+  final String? title;
+  final String? content;
 
   const Faq({
     this.id,
@@ -12,5 +12,5 @@ class Faq extends Equatable {
   });
 
   @override
-  List<Object> get props => [id];
+  List<Object?> get props => [id];
 }

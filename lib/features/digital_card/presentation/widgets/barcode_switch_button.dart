@@ -3,19 +3,19 @@ import 'package:identidaddigital/core/utils/assets.dart';
 
 class BarcodeSwitchButton extends StatelessWidget {
   final String title;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
   const BarcodeSwitchButton({
-    Key key,
-    @required this.title,
-    this.onTap,
+    Key? key,
+    required this.title,
+     this.onTap,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
-      onTap: onTap,
+      onTap: onTap ?? () {},
       child: Padding(
         padding: const EdgeInsets.all(4.0),
         child: Column(

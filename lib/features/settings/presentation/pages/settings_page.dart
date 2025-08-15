@@ -88,7 +88,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
   Future<void> _unlinkDevice(BuildContext context) async {
     final localizations = AppLocalizations.of(context);
-    DialogManager.showLoading(context: context);
+    DialogManager.showLoading(context: context, title: '');
     final reslut = await _bloc.unlinkDevice();
     if (!mounted) return;
     Navigator.of(context).pop();
@@ -98,14 +98,14 @@ class _SettingsPageState extends State<SettingsPage> {
           await DialogManager.showMessage(
             context: context,
             title: localizations.translate('error_title'),
-            message: localizations.translate(failure.key),
+            message: localizations.translate(failure.key ?? ''),
           );
           _closeSession(context);
         } else {
           DialogManager.showMessage(
             context: context,
             title: localizations.translate('error_title'),
-            message: localizations.translate(failure.key),
+            message: localizations.translate(failure.key ?? ''),
           );
         }
       },
@@ -126,7 +126,7 @@ class _SettingsPageState extends State<SettingsPage> {
     final size = MediaQuery.of(context).size;
     final localizations = AppLocalizations.of(context);
     final userProvider = Provider.of<UserProvider>(context);
-    final shouldShowChangePassword = userProvider.user.emailExt != null;
+    final shouldShowChangePassword = userProvider.user?.emailExt != null;
 
     return Scaffold(
       appBar: UserAppBar(
@@ -221,10 +221,10 @@ class _SettingsPageState extends State<SettingsPage> {
 }
 
 class _ExitButton extends StatelessWidget {
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
   const _ExitButton({
-    Key key,
+    Key? key,
     this.onTap,
   }) : super(key: key);
 
@@ -234,7 +234,7 @@ class _ExitButton extends StatelessWidget {
     return Align(
       alignment: Alignment.centerRight,
       child: NoFeedbackButton(
-        onTap: onTap,
+        onTap: onTap ?? () {},
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Row(

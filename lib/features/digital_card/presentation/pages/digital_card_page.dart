@@ -1,7 +1,7 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:screenshot_callback/screenshot_callback.dart';
+// import 'package:screenshot_callback/screenshot_callback.dart';
 
 import 'package:identidaddigital/core/error/error.dart';
 import 'package:identidaddigital/core/i18n/app_localizations.dart';
@@ -31,9 +31,9 @@ class _DigitalCardPageState extends State<DigitalCardPage>
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   final _carnet = GlobalKey<CarnetWidgetState>();
   final DigitalCardBloc _bloc = sl<DigitalCardBloc>();
-  ScreenshotCallback screenshotCallback = ScreenshotCallback();
+  // ScreenshotCallback screenshotCallback = ScreenshotCallback();
 
-  PageController _profileController;
+  PageController? _profileController;
   int _activeProfileIndex = 0;
   bool _isFrontSideFocused = true;
 
@@ -47,10 +47,10 @@ class _DigitalCardPageState extends State<DigitalCardPage>
       _requestNotificationPermission();
     });
     _bloc.turnOnScreenBrightness();
-    screenshotCallback.addListener(() {
-      final userProvider = Provider.of<UserProvider>(context, listen: false);
-      _bloc.regenerateQR(userProvider.user);
-    });
+    // screenshotCallback.addListener(() {
+    //   final userProvider = Provider.of<UserProvider>(context, listen: false);
+    //   _bloc.regenerateQR(userProvider.user!);
+    // });
   }
 
   @override
@@ -58,7 +58,7 @@ class _DigitalCardPageState extends State<DigitalCardPage>
     _bloc.dispose();
     _profileController?.dispose();
     WidgetsBinding.instance.removeObserver(this);
-    screenshotCallback.dispose();
+    // screenshotCallback.dispose();
     super.dispose();
   }
 
@@ -75,18 +75,18 @@ class _DigitalCardPageState extends State<DigitalCardPage>
 
   void _startAccessCodeGeneration() {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
-    _bloc.startAccessCodeGeneration(userProvider.user);
+    _bloc.startAccessCodeGeneration(userProvider.user!);
   }
 
   Future<void> _refreshConfig() async {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
     await _bloc
-        .updateQrPeriodicGenerationTimeWithRemoteConfig(userProvider.user);
+        .updateQrPeriodicGenerationTimeWithRemoteConfig(userProvider.user!);
   }
 
   void _regenerateQR() {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
-    _bloc.regenerateQR(userProvider.user);
+    _bloc.regenerateQR(userProvider.user!);
   }
 
   Future<void> _requestPermission() async {
@@ -133,12 +133,12 @@ class _DigitalCardPageState extends State<DigitalCardPage>
   }
 
   Future<bool> _preventPop() async {
-    final isBackSideActive = await _carnet.currentState.maybeFlip();
-    return !isBackSideActive;
+    final isBackSideActive = await _carnet.currentState?.maybeFlip();
+    return isBackSideActive ?? false;
   }
 
   void _flipCard() {
-    _carnet.currentState.flip();
+    _carnet.currentState?.flip();
     if (!_isFrontSideFocused) {
       _startAccessCodeGeneration();
     }
@@ -162,7 +162,7 @@ class _DigitalCardPageState extends State<DigitalCardPage>
   }
 
   Widget _buildBody() {
-    final user = Provider.of<UserProvider>(context).user;
+    final user = Provider.of<UserProvider>(context).user!;
     final profiles = user.profiles;
     final profilesCount = profiles.length;
     final activeProfileIndex =
@@ -181,7 +181,7 @@ class _DigitalCardPageState extends State<DigitalCardPage>
         id: ciu,
         name: user.name,
         photo: user.picture,
-        profileController: _profileController,
+        profileController: _profileController!,
         profiles: user.profiles,
         profileColor: HexColor.tryParse(profile.colorHexStr),
         clockStream: _bloc.clockStream,
@@ -195,13 +195,13 @@ class _DigitalCardPageState extends State<DigitalCardPage>
           });
         },
         onNextProfile: () {
-          _profileController.nextPage(
+          _profileController!.nextPage(
             duration: const Duration(milliseconds: 200),
             curve: Curves.easeIn,
           );
         },
         onPrevProfile: () {
-          _profileController.previousPage(
+          _profileController!.previousPage(
             duration: const Duration(milliseconds: 200),
             curve: Curves.easeIn,
           );
@@ -219,7 +219,7 @@ class _DigitalCardPageState extends State<DigitalCardPage>
             },
             onQrPressed: () {
               Navigator.of(context)
-                  .push(QrCodeFullPage.route(_bloc, snapshot.data));
+                  .push(QrCodeFullPage.route(_bloc, snapshot.data ?? ''));
             },
             onBarcodeViewChanged: (value) {},
             onQrError: () => _bloc.regenerateQR(user),

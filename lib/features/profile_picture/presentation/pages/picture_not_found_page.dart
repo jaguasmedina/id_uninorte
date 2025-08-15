@@ -51,9 +51,9 @@ class _PictureNotFoundPageState extends State<PictureNotFoundPage> {
 
   Future<void> _selectPicture() async {
     final success = await _bloc.selectFile();
-    if (success) {
+    if (success && _bloc.selectedFile != null) {
       final pictureWasUploaded = await Navigator.of(context).push<bool>(
-            UploadPicturePage.route<bool>(_bloc.selectedFile),
+            UploadPicturePage.route<bool>(_bloc.selectedFile!),
           ) ??
           false;
       if (pictureWasUploaded) {
@@ -80,7 +80,7 @@ class _PictureNotFoundPageState extends State<PictureNotFoundPage> {
                 const SizedBox(height: 16.0),
                 _buildSubtitle(context),
                 const SizedBox(height: 8.0),
-                const PictureFeaturesView(widthFactor: 0.9),
+                PictureFeaturesView(widthFactor: 0.9),
                 const SizedBox(height: 24.0),
                 SecondaryButton(
                   title: getString(context, 'select_picture'),
@@ -105,7 +105,7 @@ class _PictureNotFoundPageState extends State<PictureNotFoundPage> {
   Widget _buildIcon(BuildContext context) {
     return Icon(
       MyIcons.capture,
-      color: Theme.of(context).accentColor,
+      color: Theme.of(context).colorScheme.secondary,
       size: 100.0,
     );
   }

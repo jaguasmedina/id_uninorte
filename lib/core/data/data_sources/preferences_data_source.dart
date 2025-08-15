@@ -9,10 +9,10 @@ import 'package:identidaddigital/core/domain/entities/entities.dart';
 
 abstract class PreferencesDataSource {
   /// Read user data.
-  UserModel get user;
+  UserModel? get user;
 
   /// Store user data.
-  set user(UserModel model);
+  set user(UserModel? model);
 
   /// Authorization token.
   String get authToken;
@@ -35,9 +35,9 @@ abstract class PreferencesDataSource {
   Future<void> setRemoteConfig(RemoteConfigModel value);
 
   /// Last time where the user permissions was updated.
-  Timestamp get permissionsLastUpdatedTime;
+  Timestamp? get permissionsLastUpdatedTime;
 
-  set permissionsLastUpdatedTime(Timestamp timestamp);
+  set permissionsLastUpdatedTime(Timestamp? timestamp);
 
   /// Whether the onboarding did show.
   bool get onboardingDidShow;
@@ -61,13 +61,13 @@ class PreferencesDataSourceImpl implements PreferencesDataSource {
   static const _kEmail = 'USER_EMAIL';
 
   PreferencesDataSourceImpl({
-    @required this.preferences,
+    required this.preferences,
   });
 
   @override
   String get authToken {
     final token = preferences.getString(_kAuthToken);
-    return token;
+    return token ?? '';
   }
 
   @override
@@ -75,11 +75,10 @@ class PreferencesDataSourceImpl implements PreferencesDataSource {
     preferences.setString(_kAuthToken, value);
   }
 
-
   @override
   String get userEmail {
     final email = preferences.getString(_kEmail);
-    return email;
+    return email ?? '';
   }
 
   @override
@@ -88,7 +87,7 @@ class PreferencesDataSourceImpl implements PreferencesDataSource {
   }
 
   @override
-  UserModel get user {
+  UserModel? get user {
     try {
       final data = preferences.getString(_kUser);
       if (data != null) {
@@ -102,9 +101,13 @@ class PreferencesDataSourceImpl implements PreferencesDataSource {
   }
 
   @override
-  set user(UserModel model) {
-    final encodedModel = json.encode(model.toMap());
-    preferences.setString(_kUser, encodedModel);
+  set user(UserModel? model) {
+    if (model != null) {
+      final encodedModel = json.encode(model.toMap());
+      preferences.setString(_kUser, encodedModel);
+    } else {
+      preferences.remove(_kUser);
+    }
   }
 
   @override
@@ -139,7 +142,7 @@ class PreferencesDataSourceImpl implements PreferencesDataSource {
   }
 
   @override
-  Timestamp get permissionsLastUpdatedTime {
+  Timestamp? get permissionsLastUpdatedTime {
     final data = preferences.getInt(_kPermissionsLastUpdatedTime);
     if (data != null) {
       return Timestamp(data);
@@ -149,8 +152,12 @@ class PreferencesDataSourceImpl implements PreferencesDataSource {
   }
 
   @override
-  set permissionsLastUpdatedTime(Timestamp timestamp) {
-    preferences.setInt(_kPermissionsLastUpdatedTime, timestamp.seconds);
+  set permissionsLastUpdatedTime(Timestamp? timestamp) {
+    if (timestamp != null) {
+      preferences.setInt(_kPermissionsLastUpdatedTime, timestamp.seconds);
+    } else {
+      preferences.remove(_kPermissionsLastUpdatedTime);
+    }
   }
 
   @override

@@ -1,7 +1,7 @@
 import 'dart:io';
 
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:injectable/injectable.dart';
-import 'package:device_info/device_info.dart';
 
 import 'package:identidaddigital/core/data/models/models.dart';
 import 'package:identidaddigital/core/error/exceptions.dart';
@@ -21,45 +21,38 @@ class DeviceInfoDataSourceImpl implements DeviceInfoDataSource {
 
   @override
   Future<DeviceModel> requestDeviceData() async {
-    DeviceModel deviceModel;
     try {
       if (Platform.isAndroid) {
         final androidInfo = await deviceInfoPlugin.androidInfo;
         _validateAndroidInfo(androidInfo);
-        deviceModel = DeviceModel.fromAndroidInfo(androidInfo);
+        return DeviceModel.fromAndroidInfo(androidInfo);
       } else if (Platform.isIOS) {
         final iosInfo = await deviceInfoPlugin.iosInfo;
         _validateIosInfo(iosInfo);
-        deviceModel = DeviceModel.fromIosInfo(iosInfo);
+        return DeviceModel.fromIosInfo(iosInfo);
+      } else {
+        throw DeviceInfoException();
       }
-
-      if (deviceModel == null) throw DeviceInfoException();
-
-      return deviceModel;
-    } catch (e) {
+    } catch (_) {
       throw DeviceInfoException();
     }
   }
 
   void _validateAndroidInfo(AndroidDeviceInfo info) {
-    if (info == null) throw DeviceInfoException();
-
-    if (info.version?.release == null ||
-        info.androidId == null ||
-        info.brand == null ||
-        info.model == null) {
+    if (info.version.release?.isEmpty == true ||
+        info.id?.isEmpty == true ||
+        info.brand?.isEmpty == true ||
+        info.model?.isEmpty == true) {
       throw DeviceInfoException();
     }
   }
 
   void _validateIosInfo(IosDeviceInfo info) {
-    if (info == null) throw DeviceInfoException();
-
-    if (info.systemName == null ||
-        info.systemVersion == null ||
-        info.identifierForVendor == null ||
-        info.model == null ||
-        info.name == null) {
+    if (info.systemName?.isEmpty == true ||
+        info.systemVersion?.isEmpty == true ||
+        info.identifierForVendor?.isEmpty == true ||
+        info.model?.isEmpty == true ||
+        info.name?.isEmpty == true) {
       throw DeviceInfoException();
     }
   }

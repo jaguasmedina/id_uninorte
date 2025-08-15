@@ -7,13 +7,13 @@ import 'package:identidaddigital/features/digital_card/presentation/widgets/widg
 class CarnetWidget extends StatefulWidget {
   final Widget front;
   final Widget back;
-  final ValueChanged<bool> onFlipped;
-  final VoidCallback onTap;
+  final ValueChanged<bool>? onFlipped;
+  final VoidCallback? onTap;
 
   const CarnetWidget({
-    Key key,
-    @required this.front,
-    @required this.back,
+    Key? key,
+    required this.front,
+    required this.back,
     this.onFlipped,
     this.onTap,
   }) : super(key: key);
@@ -24,8 +24,8 @@ class CarnetWidget extends StatefulWidget {
 
 class CarnetWidgetState extends State<CarnetWidget>
     with SingleTickerProviderStateMixin {
-  AnimationController _animationController;
-  Animation<double> _animation;
+  late AnimationController _animationController;
+  late Animation<double> _animation;
 
   @override
   void initState() {
@@ -52,10 +52,10 @@ class CarnetWidgetState extends State<CarnetWidget>
   void flip() {
     if (_animationController.isCompleted) {
       _animationController.reverse();
-      widget.onFlipped(true);
+      widget.onFlipped!(true);
     } else if (_animationController.isDismissed) {
       _animationController.forward();
-      widget.onFlipped(false);
+      widget.onFlipped!(false);
     }
   }
 
@@ -63,7 +63,7 @@ class CarnetWidgetState extends State<CarnetWidget>
   Future<bool> maybeFlip() async {
     if (_animationController.isCompleted) {
       await _animationController.reverse();
-      widget.onFlipped(true);
+      widget.onFlipped!(true);
       return true;
     } else {
       return false;
@@ -80,7 +80,7 @@ class CarnetWidgetState extends State<CarnetWidget>
       onTap: widget.onTap,
       child: AnimatedBuilder(
         animation: _animationController,
-        builder: (BuildContext context, Widget child) {
+        builder: (BuildContext context, Widget? child) {
           final transform = Matrix4.identity()
             ..setEntry(3, 2, 0.001)
             ..rotateY(math.pi * _animation.value);

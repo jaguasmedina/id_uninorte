@@ -65,7 +65,7 @@ class _FaqsPageState extends State<FaqsPage> {
                 position: LabelPosition.left,
                 child: const Icon(Icons.help_outline, size: 30.0),
               ),
-            )
+            ) as PreferredSizeWidget
           : SimpleAppBar(
               title: localizations.translate('settings_help'),
               icon: Icons.arrow_back,
@@ -84,7 +84,8 @@ class _FaqsPageState extends State<FaqsPage> {
             } else if (state == PageState.error && _bloc.failure != null) {
               return FaqsEmptyView(
                 title: getString(context, 'error_title'),
-                subtitle: getString(context, _bloc.failure.key),
+                subtitle:
+                    getString(context, _bloc.failure?.key ?? 'error_message'),
                 onTap: () => requestFaqs(),
               );
             } else {

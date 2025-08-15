@@ -59,7 +59,7 @@ class _ProfilePicturePageState extends State<ProfilePicturePage> {
         DialogManager.showMessage(
           context: context,
           title: localizations.translate('error_title'),
-          message: localizations.translate(failure.key),
+          message: localizations.translate(failure.key ?? ''),
         );
       },
       (_) {
@@ -78,7 +78,7 @@ class _ProfilePicturePageState extends State<ProfilePicturePage> {
     } else if (status.isRejected) {
       return MyIcons.info;
     } else {
-      return null;
+      return MyIcons.info;
     }
   }
 
@@ -101,7 +101,7 @@ class _ProfilePicturePageState extends State<ProfilePicturePage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       PictureCard(
-                        imageUrl: userProvider.user.picture,
+                        imageUrl: userProvider.user?.picture ?? '',
                         imageFile: _bloc.selectedFile,
                         isUploading: state == PageState.busy,
                         onUpload: _uploadPicture,
@@ -112,7 +112,7 @@ class _ProfilePicturePageState extends State<ProfilePicturePage> {
                         getString(context, 'profile_change_picture'),
                       ),
                       _buildSatusMessage(),
-                      const PictureFeaturesView(),
+                      PictureFeaturesView(),
                     ],
                   ),
                 ),
@@ -137,7 +137,7 @@ class _ProfilePicturePageState extends State<ProfilePicturePage> {
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: SecondaryButton(
-        onPressed: _bloc.selectFile,
+        onPressed: () => _bloc.selectFile(),
         title: getString(context, 'profile_upload_button'),
       ),
     );

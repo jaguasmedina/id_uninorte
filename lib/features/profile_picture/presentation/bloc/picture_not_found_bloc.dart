@@ -10,7 +10,7 @@ import 'package:identidaddigital/features/profile_picture/domain/repositories/pi
 
 @injectable
 class PictureNotFoundBloc extends BaseBloc {
-  File _selectedFile;
+  File? _selectedFile;
   PictureStatus _pictureStatus = const EmptyPictureStatus();
   final FileManagerRepository _fileManagerRepository;
   final PictureRepository _pictureRepository;
@@ -20,7 +20,7 @@ class PictureNotFoundBloc extends BaseBloc {
     this._pictureRepository,
   );
 
-  File get selectedFile => _selectedFile;
+  File? get selectedFile => _selectedFile;
 
   PictureStatus get pictureStatus => _pictureStatus;
 

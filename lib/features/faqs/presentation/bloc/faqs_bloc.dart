@@ -10,7 +10,7 @@ import 'package:identidaddigital/core/presentation/bloc/base_bloc.dart';
 @injectable
 class FaqsBloc extends BaseBloc {
   final FaqsRepository _repository;
-  Failure _failure;
+  Failure? _failure;
   List<Faq> _faqs = [];
 
   FaqsBloc(this._repository);
@@ -18,7 +18,7 @@ class FaqsBloc extends BaseBloc {
   @override
   PageState get initialState => PageState.busy;
 
-  Failure get failure => _failure;
+  Failure? get failure => _failure;
   List<Faq> get faqs => _faqs;
 
   Future<Either<Failure, List<Faq>>> requestFaqs() async {

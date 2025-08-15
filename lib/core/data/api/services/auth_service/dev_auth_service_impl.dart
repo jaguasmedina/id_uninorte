@@ -80,8 +80,9 @@ class DevAuthServiceImpl implements AuthService {
         }
       },
     );
-    final String accessToken = response.data['access_token'];
-    final userModel = UserModel.fromMap(response.data);
+    final String accessToken = response.data['access_token'] as String;
+    final userModel =
+        UserModel.fromMap(Map<String, dynamic>.from(response.data));
     return tuple2(userModel, accessToken);
   }
 }

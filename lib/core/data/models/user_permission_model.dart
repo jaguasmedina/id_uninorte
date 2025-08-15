@@ -1,4 +1,3 @@
-import 'package:meta/meta.dart';
 import 'package:identidaddigital/core/data/models/user_profile_model.dart';
 import 'package:identidaddigital/core/domain/entities/entities.dart';
 
@@ -7,11 +6,11 @@ class UserPermissionModel extends UserPermission {
   final List<UserProfileModel> profiles;
 
   const UserPermissionModel({
-    @required String id,
-    @required String name,
-    @required String document,
-    @required String picture,
-    @required this.profiles,
+    required String id,
+    required String name,
+    required String document,
+    required String picture,
+    required this.profiles,
   }) : super(
           id: id,
           name: name,
@@ -21,15 +20,15 @@ class UserPermissionModel extends UserPermission {
         );
 
   factory UserPermissionModel.fromMap(Map map) {
-    if (map == null) return null;
     return UserPermissionModel(
-      id: map['id'],
-      name: map['nombre'],
-      document: map['documento'],
-      picture: map['foto'],
-      profiles: (map['perfilesnew'] as List)
-          .map((dynamic e) => UserProfileModel.fromMap(e))
-          .toList(),
+      id: map['id'] ?? '',
+      name: map['nombre'] ?? '',
+      document: map['documento'] ?? '',
+      picture: map['foto'] ?? '',
+      profiles: (map['perfilesnew'] as List?)
+              ?.map((dynamic e) => UserProfileModel.fromMap(e))
+              .toList() ??
+          [],
     );
   }
 

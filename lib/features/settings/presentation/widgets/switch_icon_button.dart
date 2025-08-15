@@ -6,12 +6,12 @@ class SwitchIconButton extends StatelessWidget {
   final String title;
   final bool enabled;
   final EdgeInsetsGeometry iconPadding;
-  final ValueChanged<bool> onChanged;
+  final ValueChanged<bool>? onChanged;
 
   const SwitchIconButton({
-    Key key,
-    @required this.icon,
-    @required this.title,
+    Key? key,
+    required this.icon,
+    required this.title,
     this.enabled = true,
     this.iconPadding = EdgeInsets.zero,
     this.onChanged,
@@ -42,8 +42,8 @@ class SwitchIconButton extends StatelessWidget {
         const SizedBox(height: 12.0),
         CupertinoSwitch(
           value: enabled,
-          activeColor: Theme.of(context).accentColor,
-          onChanged: onChanged,
+          activeColor: Theme.of(context).colorScheme.secondary,
+          onChanged: onChanged ?? (_) {},
         )
       ],
     );

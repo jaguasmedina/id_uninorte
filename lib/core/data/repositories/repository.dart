@@ -17,10 +17,13 @@ abstract class Repository {
     try {
       return await callback();
     } on AppException catch (e) {
+      print('🔍 ERROR DEBUG: AppException caught: ${e.runtimeType}');
       return Left(e.toFailure());
-    } on SocketException {
+    } on SocketException catch (e) {
+      print('🔍 ERROR DEBUG: SocketException caught: $e');
       return Left(NetworkFailure());
-    } on FormatException {
+    } on FormatException catch (e) {
+      print('🔍 ERROR DEBUG: FormatException caught: $e');
       return Left(FormatFailure());
     } catch (e) {
       if (e is TypeError) {

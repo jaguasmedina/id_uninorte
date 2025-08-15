@@ -30,10 +30,10 @@ class UserPermissionRepositoryImpl extends Repository
         await networkInfo.ensureConnection();
         final user = preferences.user;
         final permission = await profileService.requestUserPermission(
-          user.document,
-          user.currentEmail,
+          user?.document ?? '',
+          user?.currentEmail ?? '',
         );
-        final UserModel updatedUser = user.copyModel(permission: permission);
+        final UserModel updatedUser = user?.copyModel(permission: permission) ?? UserModel(permission: permission, deviceUID: '', deviceBrand: '', deviceModel: '', emailExt: '', emailUN: '', lastAccess: '');
         preferences.user = updatedUser;
         preferences.permissionsLastUpdatedTime = Timestamp.now();
         return Right(updatedUser);

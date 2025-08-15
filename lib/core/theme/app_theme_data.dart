@@ -9,11 +9,11 @@ class AppThemeData {
   final Color secondaryHeaderColor;
 
   const AppThemeData({
-    @required this.backgroundColor,
-    @required this.accentColor,
-    @required this.primaryColor,
-    @required this.secondaryColor,
-    @required this.secondaryHeaderColor,
+    required this.backgroundColor,
+    required this.accentColor,
+    required this.primaryColor,
+    required this.secondaryColor,
+    required this.secondaryHeaderColor,
   });
 
   factory AppThemeData.light() {

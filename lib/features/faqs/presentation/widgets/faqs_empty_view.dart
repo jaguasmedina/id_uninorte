@@ -5,12 +5,12 @@ import 'package:identidaddigital/core/presentation/widgets/widgets.dart';
 class FaqsEmptyView extends StatelessWidget {
   final String title;
   final String subtitle;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
   const FaqsEmptyView({
-    Key key,
-    @required this.title,
-    @required this.subtitle,
+    Key? key,
+    required this.title,
+    required this.subtitle,
     this.onTap,
   }) : super(key: key);
 
@@ -39,7 +39,7 @@ class FaqsEmptyView extends StatelessWidget {
           Align(
             child: PrimaryButton(
               title: getString(context, 'retry'),
-              onPressed: onTap,
+              onPressed: onTap ?? () {},
             ),
           ),
         ],

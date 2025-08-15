@@ -7,7 +7,7 @@ class BodyText extends StatelessWidget {
 
   const BodyText(
     this.text, {
-    Key key,
+    Key? key,
     this.fontWeight = FontWeight.normal,
     this.textAlign = TextAlign.center,
   }) : super(key: key);
@@ -30,8 +30,8 @@ class BodyRichText extends StatelessWidget {
   final TextAlign textAlign;
 
   const BodyRichText({
-    Key key,
-    @required this.children,
+    Key? key,
+    required this.children,
     this.textAlign = TextAlign.center,
   }) : super(key: key);
   @override
@@ -51,7 +51,7 @@ class BodyRichText extends StatelessWidget {
 
 class BoldTextSpan extends TextSpan {
   const BoldTextSpan({
-    String text,
+    required String text,
   }) : super(
           text: text,
           style: const TextStyle(

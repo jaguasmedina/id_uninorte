@@ -5,9 +5,9 @@ class SlideIndicator extends StatelessWidget {
   final double currentSlide;
 
   const SlideIndicator({
-    Key key,
-    @required this.currentSlide,
-    @required this.length,
+    Key? key,
+    required this.currentSlide,
+    required this.length,
   }) : super(key: key);
 
   @override
@@ -22,8 +22,8 @@ class SlideIndicator extends StatelessWidget {
         children: List.generate(length, (int i) {
           final isCurrentSlide = currentSlide.round() == i;
           final size = isCurrentSlide ? 14.0 : 14.0;
-          final color = isCurrentSlide ? theme.accentColor : Colors.white;
-          final borderColor = isCurrentSlide ? theme.accentColor : Colors.black;
+          final color = isCurrentSlide ? theme.colorScheme.secondary : Colors.white;
+          final borderColor = isCurrentSlide ? theme.colorScheme.secondary : Colors.black;
           return AnimatedContainer(
             width: size,
             height: size,

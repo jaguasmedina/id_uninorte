@@ -1,8 +1,8 @@
 import 'package:identidaddigital/core/utils/validators.dart';
 
 class AuthCredentials {
-  String username;
-  String password;
+  String? username;
+  String? password;
 
   AuthCredentials({
     this.username,
@@ -10,12 +10,12 @@ class AuthCredentials {
   });
 
   bool get hasValidEmailAsUsername {
-    return PatternValidators.isValidEmail(username);
+    return PatternValidators.isValidEmail(username ?? '');
   }
 
   AuthCredentials copyWith({
-    String username,
-    String password,
+    String? username,
+    String? password,
   }) {
     return AuthCredentials(
       username: username ?? this.username,
@@ -27,7 +27,7 @@ class AuthCredentials {
   /// to the previous [username].
   AuthCredentials concatToUsername(String value) {
     return AuthCredentials(
-      username: username + value,
+      username: username != null ? username! + value : null,
       password: password,
     );
   }

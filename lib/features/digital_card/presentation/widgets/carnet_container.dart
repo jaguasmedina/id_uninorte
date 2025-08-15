@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 class CarnetContainer extends StatelessWidget {
-  final Widget child;
+  final Widget? child;
   // final Widget topLayer;
 
   const CarnetContainer({
-    Key key,
+    Key? key,
     this.child,
     // this.topLayer,
   }) : super(key: key);
@@ -16,7 +16,7 @@ class CarnetContainer extends StatelessWidget {
       decoration: BoxDecoration(
         color: Theme.of(context).primaryColor,
       ),
-      child: child,
+      child: child ?? const SizedBox.shrink(),
     );
   }
 

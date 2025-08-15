@@ -28,7 +28,7 @@ class PictureRepositoryImpl extends Repository implements PictureRepository {
     return runCatching(() async {
       await networkInfo.ensureConnection();
       final user = preferences.user;
-      final response = await profileService.requestPictureStatus(user.document);
+      final response = await profileService.requestPictureStatus(user?.document ?? '');
       return Right(response);
     });
   }
@@ -38,7 +38,7 @@ class PictureRepositoryImpl extends Repository implements PictureRepository {
     return runCatching(() async {
       await networkInfo.ensureConnection();
       final user = preferences.user;
-      await profileService.uploadPicture(user.document, picture);
+      await profileService.uploadPicture(user?.document ?? '', picture);
       return const Right(unit);
     });
   }

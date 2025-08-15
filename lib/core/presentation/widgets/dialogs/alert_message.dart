@@ -6,19 +6,19 @@ import 'package:identidaddigital/core/presentation/widgets/primary_button.dart';
 
 class AlertMessage extends StatelessWidget {
   /// Title of the dialog
-  final String title;
+  final String? title;
 
   /// Message of the dialog
-  final String message;
+  final String? message;
 
   /// Title of the dialog button
-  final String buttonText;
+  final String? buttonText;
 
   /// Called when the button is pressed
-  final Function onPressed;
+  final VoidCallback? onPressed;
 
   const AlertMessage({
-    @required this.onPressed,
+    required this.onPressed,
     this.title,
     this.message,
     this.buttonText,
@@ -61,9 +61,9 @@ class AlertMessage extends StatelessWidget {
 
   Widget _buildTitle(BuildContext context) {
     return Text(
-      title,
+      title ?? '',
       textAlign: TextAlign.center,
-      style: Theme.of(context).textTheme.bodyText2.copyWith(
+      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
             fontWeight: FontWeight.w600,
             fontSize: 18.0,
           ),
@@ -72,9 +72,9 @@ class AlertMessage extends StatelessWidget {
 
   Widget _buildMessage(BuildContext context) {
     return Text(
-      message,
+      message ?? '',
       textAlign: TextAlign.center,
-      style: Theme.of(context).textTheme.bodyText2.copyWith(
+      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
             fontWeight: FontWeight.w500,
             fontSize: 16.0,
           ),
@@ -84,7 +84,7 @@ class AlertMessage extends StatelessWidget {
   Widget _buildButton(BuildContext context) {
     final localizations = AppLocalizations.of(context);
     return PrimaryButton(
-      onPressed: onPressed,
+      onPressed: onPressed ?? () {},
       title: buttonText ?? localizations.translate('ok'),
     );
   }

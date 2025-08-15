@@ -5,9 +5,9 @@ class FadeScaleTransition extends StatelessWidget {
   final Widget child;
 
   const FadeScaleTransition({
-    Key key,
-    @required this.animation,
-    @required this.child,
+    Key? key,
+    required this.animation,
+    required this.child,
   }) : super(key: key);
 
   @override

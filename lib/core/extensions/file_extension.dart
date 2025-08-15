@@ -9,7 +9,7 @@ extension FileExtension on File {
   ///
   /// [field]: The form field to send to the request.
   Future<MultipartFile> toMultipartFile(String field) async {
-    final mediaType = mime.lookupMimeType(path).split('/');
+    final mediaType = mime.lookupMimeType(path)?.split('/') ?? ['', ''];
     final multipartFile = await MultipartFile.fromPath(
       field,
       path,

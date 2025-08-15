@@ -5,7 +5,7 @@ class DiagonalPainter extends CustomPainter {
   final double offset;
 
   DiagonalPainter({
-    @required this.color,
+    required this.color,
     this.offset = 0.0,
   });
 

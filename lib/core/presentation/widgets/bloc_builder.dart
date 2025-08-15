@@ -14,9 +14,9 @@ class BlocBuilder<T extends BaseBloc> extends StatelessWidget {
   final BlocWidgetBuilder builder;
 
   const BlocBuilder({
-    Key key,
-    @required this.bloc,
-    @required this.builder,
+    Key? key,
+    required this.bloc,
+    required this.builder,
   }) : super(key: key);
 
   @override
@@ -27,7 +27,7 @@ class BlocBuilder<T extends BaseBloc> extends StatelessWidget {
         stream: bloc.stream,
         initialData: bloc.initialState,
         builder: (context, snapshot) {
-          return builder(context, snapshot.data);
+          return builder(context, snapshot.data ?? bloc.initialState);
         },
       ),
     );

@@ -16,6 +16,6 @@ const Map<String, Profile> _profileDefinitions = {
 
 @Deprecated('Unused function')
 Profile findProfile(String value) {
-  Profile profile = _profileDefinitions[value];
-  return profile ??= _profileDefinitions['ES'];
+  Profile profile = _profileDefinitions[value]!;
+  return profile;
 }

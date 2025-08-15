@@ -36,26 +36,32 @@ class _ChangeExternalPasswordSettingsPageState
 
   Future<void> _validateForm() async {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
-    if (userProvider.user.emailExt == null) {
+    final user = userProvider.user;
+    final emailExt = user?.emailExt;
+
+    // Verificar si el usuario es externo (tiene emailExt válido)
+    if (emailExt == null || emailExt.isEmpty) {
       await DialogManager.showMessage(
         context: context,
         title: getString(context, 'change_external_password_error_title'),
         message: getString(context, 'change_external_password_error_subtitle'),
       );
       Navigator.of(context).pop();
-    } else {
-      if (_form.currentState.validate()) {
-        _form.currentState.save();
-        _bloc.changeUsername(userProvider.user.emailExt);
-        FocusScope.of(context).unfocus();
-        await _changePassword();
-      }
+      return; // Salir temprano para usuarios internos
+    }
+
+    // Solo proceder si el formulario es válido
+    if (_form.currentState?.validate() ?? false) {
+      _form.currentState?.save();
+      _bloc.changeUsername(emailExt);
+      FocusScope.of(context).unfocus();
+      await _changePassword();
     }
   }
 
   Future<void> _changePassword() async {
     final localizations = AppLocalizations.of(context);
-    DialogManager.showLoading(context: context);
+    DialogManager.showLoading(context: context, title: '');
     final result = await _bloc.changePasswordForExternalUser();
     if (!mounted) return;
     Navigator.of(context).pop();
@@ -64,7 +70,7 @@ class _ChangeExternalPasswordSettingsPageState
         DialogManager.showMessage(
           context: context,
           title: localizations.translate('error_title'),
-          message: localizations.translate(failure.key),
+          message: localizations.translate(failure.key ?? ''),
         );
       },
       (_) async {
@@ -138,14 +144,16 @@ class _ChangeExternalPasswordSettingsPageState
                       hintText: localizations
                           .translate('change_external_password_hint'),
                       obscureText: true,
+                      maxLines:
+                          1, // Campo de contraseña debe ser de una sola línea
                       inputFormatters: [WhiteSpaceTextInputFormatter()],
                       validator: (value) {
                         final result =
-                            FormValidators.validatePasswordPattern(value);
+                            FormValidators.validatePasswordPattern(value ?? '');
                         if (result == null) return result;
                         return localizations.translate(result);
                       },
-                      onSaved: _bloc.changePassword,
+                      onSaved: (value) => _bloc.changePassword(value ?? ''),
                     ),
                   ),
                   const SizedBox(height: 24.0),

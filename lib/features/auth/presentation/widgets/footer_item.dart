@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 class FooterItem extends StatelessWidget {
-  final String text;
-  final void Function() onTap;
+  final String? text;
+  final void Function()? onTap;
 
   const FooterItem({
-    Key key,
+    Key? key,
     this.text,
     this.onTap,
   }) : super(key: key);
@@ -18,7 +18,7 @@ class FooterItem extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Text(
-          text,
+          text ?? '',
           style: const TextStyle(decoration: TextDecoration.underline),
         ),
       ),

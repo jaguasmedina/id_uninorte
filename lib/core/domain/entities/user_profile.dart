@@ -1,11 +1,10 @@
-import 'package:meta/meta.dart';
 import 'package:equatable/equatable.dart';
 
 class UserProfile extends Equatable {
   const UserProfile({
-    @required this.name,
-    @required this.title,
-    @required this.colorHexStr,
+    required this.name,
+    required this.title,
+    required this.colorHexStr,
   });
 
   final String name;
@@ -13,5 +12,5 @@ class UserProfile extends Equatable {
   final String colorHexStr;
 
   @override
-  List<Object> get props => [name, title, colorHexStr];
+  List<Object?> get props => [name, title, colorHexStr];
 }

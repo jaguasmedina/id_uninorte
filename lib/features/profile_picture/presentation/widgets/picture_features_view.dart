@@ -6,7 +6,7 @@ class PictureFeaturesView extends StatelessWidget {
   final double widthFactor;
 
   const PictureFeaturesView({
-    Key key,
+    Key? key,
     this.widthFactor = 0.7,
   }) : super(key: key);
 
@@ -33,7 +33,7 @@ class _FeatureText extends StatelessWidget {
   final String text;
   const _FeatureText(
     this.text, {
-    Key key,
+    Key? key,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {

@@ -1,14 +1,12 @@
-import 'package:meta/meta.dart';
 
-@immutable
 class RemoteConfig {
   const RemoteConfig({
-    @required this.refreshTimeMilli,
+    required this.refreshTimeMilli,
     this.minVersionCode,
   });
 
   final int refreshTimeMilli;
-  final int minVersionCode;
+  final int? minVersionCode;
 
   @override
   String toString() =>

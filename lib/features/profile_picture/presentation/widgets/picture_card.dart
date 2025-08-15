@@ -7,14 +7,14 @@ import 'package:identidaddigital/core/i18n/app_localizations.dart';
 import 'package:identidaddigital/core/presentation/widgets/widgets.dart';
 
 class PictureCard extends StatelessWidget {
-  final String imageUrl;
-  final File imageFile;
+  final String? imageUrl;
+  final File? imageFile;
   final bool isUploading;
-  final VoidCallback onUpload;
-  final IconData icon;
+  final VoidCallback? onUpload;
+  final IconData? icon;
 
   const PictureCard({
-    Key key,
+    Key? key,
     this.imageUrl,
     this.imageFile,
     this.onUpload,
@@ -24,7 +24,7 @@ class PictureCard extends StatelessWidget {
 
   void _upload() {
     if (!isUploading && onUpload != null) {
-      onUpload();
+      onUpload!();
     }
   }
 
@@ -47,7 +47,7 @@ class PictureCard extends StatelessWidget {
           child: Icon(
             icon,
             size: 40.0,
-            color: theme.accentColor,
+            color: theme.colorScheme.secondary,
           ),
         )
     ];
@@ -65,14 +65,14 @@ class PictureCard extends StatelessWidget {
     } else if (imageUrl != null) {
       imageChild = CustomNetworkImage(
         fit: BoxFit.cover,
-        data: imageUrl,
+        data: imageUrl ?? '',
       );
     } else {
       imageChild = const Placeholder();
     }
     return AnimatedSwitcher(
       duration: const Duration(milliseconds: 300),
-      layoutBuilder: (Widget currentChild, List<Widget> previousChildren) {
+      layoutBuilder: (Widget? currentChild, List<Widget> previousChildren) {
         return Stack(
           fit: StackFit.passthrough,
           children: <Widget>[
@@ -94,7 +94,7 @@ class PictureCard extends StatelessWidget {
         children: <Widget>[
           Image(
             fit: BoxFit.cover,
-            image: FileImage(imageFile),
+            image: FileImage(imageFile!),
           ),
           Container(
             color: Colors.black38,

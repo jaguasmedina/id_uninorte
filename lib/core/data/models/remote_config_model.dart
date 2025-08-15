@@ -2,11 +2,11 @@ import 'package:identidaddigital/core/domain/entities/entities.dart';
 
 class RemoteConfigModel extends RemoteConfig {
   const RemoteConfigModel({
-    int refreshTimeMilli,
-    int minVersionCode,
+    int? refreshTimeMilli,
+    int? minVersionCode,
   }) : super(
-          refreshTimeMilli: refreshTimeMilli,
-          minVersionCode: minVersionCode,
+          refreshTimeMilli: refreshTimeMilli ?? 30000,
+          minVersionCode: minVersionCode ?? 0,
         );
 
   factory RemoteConfigModel.fromMap(Map map) {
@@ -17,15 +17,15 @@ class RemoteConfigModel extends RemoteConfig {
   }
 
   factory RemoteConfigModel.initial() {
-    return RemoteConfigModel(
-      refreshTimeMilli: 30e3.toInt(),
+    return const RemoteConfigModel(
+      refreshTimeMilli: 30000,
     );
   }
 
   Map<String, Object> toMap() {
     return {
       'refresh_time_milli': refreshTimeMilli,
-      'min_version_code': minVersionCode,
+      'min_version_code': minVersionCode ?? 0,
     };
   }
 }

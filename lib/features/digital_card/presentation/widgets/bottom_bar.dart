@@ -2,14 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:identidaddigital/core/theme/app_theme.dart';
 import 'package:identidaddigital/core/utils/utils.dart' show MyIcons;
 
+/// Barra inferior de la tarjeta digital que contiene los botones de acción.
+///
+/// **Cambios realizados para solucionar problemas de iconos:**
+/// - **Problema identificado**: Los iconos personalizados no se veían debido a problemas de contraste de color
+/// - **Causa raíz**: Iconos blancos sobre fondo blanco (primaryColor = blanco)
+/// - **Solución aplicada**: Especificación explícita de colores para todos los iconos
+///   - Botones laterales: Iconos negros sobre fondo blanco
+///   - Botón central: Icono negro sobre fondo blanco
+///
+/// **Iconos utilizados:**
+/// - `MyIcons.settings`: Configuración (botón izquierdo)
+/// - `MyIcons.refresh`: Voltear tarjeta (botón derecho)
+/// - `MyIcons.capture`: Cámara/foto (botón central)
+
 class BottomBar extends StatelessWidget {
   static const _height = 64.0;
 
   final ValueChanged<int> onPressed;
 
   const BottomBar({
-    Key key,
-    @required this.onPressed,
+    Key? key,
+    required this.onPressed,
   }) : super(key: key);
 
   @override
@@ -65,10 +79,10 @@ class BottomBar extends StatelessWidget {
 }
 
 class _CircularIconButton extends StatelessWidget {
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
   const _CircularIconButton({
-    Key key,
+    Key? key,
     this.onTap,
   }) : super(key: key);
 
@@ -76,7 +90,7 @@ class _CircularIconButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final appTheme = AppTheme.of(context);
     return GestureDetector(
-      onTap: onTap,
+      onTap: onTap ?? () {},
       child: Container(
         width: 80.0,
         height: 80.0,
@@ -94,6 +108,7 @@ class _CircularIconButton extends StatelessWidget {
         child: const FittedBox(
           child: Icon(
             MyIcons.capture,
+            color: Colors.black,
           ),
         ),
       ),
@@ -106,9 +121,9 @@ class _TileIconButton extends StatelessWidget {
   final VoidCallback onPressed;
 
   const _TileIconButton({
-    Key key,
-    @required this.icon,
-    @required this.onPressed,
+    Key? key,
+    required this.icon,
+    required this.onPressed,
   }) : super(key: key);
 
   @override
@@ -116,12 +131,12 @@ class _TileIconButton extends StatelessWidget {
     return TextButton(
       onPressed: onPressed,
       style: TextButton.styleFrom(
-        primary: AppTheme.of(context).primaryColor,
+        backgroundColor: AppTheme.of(context).primaryColor,
         shape: const CircleBorder(),
         padding: const EdgeInsets.all(12.0),
         minimumSize: const Size(46, 46),
       ),
-      child: Icon(icon, size: 30),
+      child: Icon(icon, size: 30, color: Colors.black),
     );
   }
 }

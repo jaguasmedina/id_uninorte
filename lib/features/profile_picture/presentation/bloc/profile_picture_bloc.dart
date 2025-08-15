@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
-import 'package:device_info/device_info.dart';
 import 'package:identidaddigital/core/domain/entities/entities.dart';
 import 'package:identidaddigital/core/enums/enums.dart';
 import 'package:identidaddigital/core/error/error.dart';
@@ -13,7 +12,7 @@ import 'package:permission_handler/permission_handler.dart';
 
 @injectable
 class ProfilePictureBloc extends BaseBloc {
-  File _selectedFile;
+  File? _selectedFile;
   PictureStatus _pictureStatus = const EmptyPictureStatus();
   final FileManagerRepository _fileManagerRepository;
   final PictureRepository _pictureRepository;
@@ -23,7 +22,7 @@ class ProfilePictureBloc extends BaseBloc {
     this._pictureRepository,
   );
 
-  File get selectedFile => _selectedFile;
+  File? get selectedFile => _selectedFile;
   PictureStatus get pictureStatus => _pictureStatus;
   Function get selectFile => _selectFile;
 
@@ -34,6 +33,9 @@ class ProfilePictureBloc extends BaseBloc {
 
       if (file != null) {
         _selectedFile = file;
+        setState(PageState.idle);
+      } else {
+        _selectedFile = null;
         setState(PageState.idle);
       }
     }
@@ -54,8 +56,12 @@ class ProfilePictureBloc extends BaseBloc {
   }
 
   Future<Either<Failure, Unit>> uploadPicture() async {
+    if (selectedFile == null) {
+      return Left(UnexpectedFailure());
+    }
+
     setState(PageState.busy);
-    final result = await _pictureRepository.uploadPicture(selectedFile);
+    final result = await _pictureRepository.uploadPicture(selectedFile!);
     result.fold(
       (failure) {
         setState(PageState.idle);

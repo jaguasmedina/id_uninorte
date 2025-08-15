@@ -17,7 +17,7 @@ class FileManagerRepositoryImpl implements FileManagerRepository {
       final file = await imagePickerDataSource.pickImageFromCamera();
       return file;
     } catch (e) {
-      return null;
+      rethrow;
     }
   }
 
@@ -27,7 +27,7 @@ class FileManagerRepositoryImpl implements FileManagerRepository {
       final file = await imagePickerDataSource.pickImageFromGallery();
       return file;
     } catch (e) {
-      return null;
+      rethrow;
     }
   }
 }

@@ -1,25 +1,24 @@
-import 'package:device_info/device_info.dart';
-import 'package:meta/meta.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:identidaddigital/core/domain/entities/device.dart';
 
 class DeviceModel extends Device {
   const DeviceModel({
-    @required String id,
-    @required String brand,
-    @required String model,
-    String systemName,
-    String systemVersion,
+    required String id,
+    required String brand,
+    required String model,
+    String? systemName,
+    String? systemVersion,
   }) : super(
           id: id,
           brand: brand,
           model: model,
-          systemName: systemName,
-          systemVersion: systemVersion,
+          systemName: systemName ?? '',
+          systemVersion: systemVersion ?? '',
         );
 
   factory DeviceModel.fromAndroidInfo(AndroidDeviceInfo info) {
     return DeviceModel(
-      id: info.androidId,
+      id: info.id,
       brand: info.brand,
       model: info.model,
       systemName: 'android',
@@ -29,10 +28,10 @@ class DeviceModel extends Device {
 
   factory DeviceModel.fromIosInfo(IosDeviceInfo info) {
     return DeviceModel(
-      id: info.identifierForVendor,
+      id: info.identifierForVendor ?? '',
       brand: info.model,
       // model: info.name, // <-- DeviceInfo.Name is a default value since iOS 16 https://developer.apple.com/documentation/bundleresources/entitlements/com_apple_developer_device-information_user-assigned-device-name
-      model: info.identifierForVendor,
+      model: info.identifierForVendor ?? '',
       systemName: info.systemName,
       systemVersion: info.systemVersion,
     );
@@ -43,8 +42,8 @@ class DeviceModel extends Device {
       'uid': id,
       'brand': brand,
       'model': model,
-      'movilso': systemName,
-      'versionso': systemVersion,
+      'movilso': systemName ?? '',
+      'versionso': systemVersion ?? '',
     };
   }
 }

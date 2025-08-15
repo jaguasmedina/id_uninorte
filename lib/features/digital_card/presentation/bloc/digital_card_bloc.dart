@@ -16,7 +16,8 @@ import 'package:identidaddigital/features/digital_card/domain/repositories/digit
 
 @injectable
 class DigitalCardBloc extends BaseBloc {
-  Timer _qrTimer, _clockTimer;
+  Timer? _qrTimer;
+  Timer? _clockTimer;
   final DigitalCardRepository _digitalCardRepository;
   final UserPermissionRepository _permissionRepository;
   final RemoteConfigRepository _remoteConfigRepository;
@@ -45,7 +46,7 @@ class DigitalCardBloc extends BaseBloc {
   }
 
   Future<void> regenerateQR(User user) {
-    _qrController.sink.add(null);
+    _qrController.sink.add('');
     return _generateQR(user);
   }
 

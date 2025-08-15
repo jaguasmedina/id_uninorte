@@ -25,7 +25,10 @@ class Footer extends StatelessWidget {
 
     Future<void> _unlinkDevice(BuildContext context) async {
       final localizations = AppLocalizations.of(context);
-      DialogManager.showLoading(context: context);
+      DialogManager.showLoading(
+        context: context,
+        title: localizations.translate('loading'),
+      );
       final result = await _bloc.unlinkDevice();
       Navigator.of(context).pop();
       result.fold(
@@ -34,13 +37,13 @@ class Footer extends StatelessWidget {
             await DialogManager.showMessage(
               context: context,
               title: localizations.translate('error_title'),
-              message: localizations.translate(failure.key),
+              message: localizations.translate(failure.key ?? ''),
             );
           } else {
             DialogManager.showMessage(
               context: context,
               title: localizations.translate('error_title'),
-              message: localizations.translate(failure.key),
+              message: localizations.translate(failure.key ?? ''),
             );
           }
         },

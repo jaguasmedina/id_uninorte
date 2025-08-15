@@ -2,11 +2,11 @@ import 'package:identidaddigital/core/domain/entities/message.dart';
 
 class MessageModel extends Message {
   const MessageModel({
-    String sender,
-    String content,
+    String? sender,
+    String? content,
   }) : super(
-          sender: sender,
-          content: content,
+          sender: sender ?? '',
+          content: content ?? '',
         );
 
   factory MessageModel.fromEntity(Message entity) {
@@ -18,8 +18,8 @@ class MessageModel extends Message {
 
   Map<String, String> toMap() {
     return {
-      'email': sender,
-      'message': content,
+      'email': sender ?? '',
+      'message': content ?? '',
     };
   }
 }

@@ -59,7 +59,7 @@ class _ExternalsFaqsPageState extends State<ExternalsFaqsPage> {
             } else if (state == PageState.error && _bloc.failure != null) {
               return FaqsEmptyView(
                 title: getString(context, 'error_title'),
-                subtitle: getString(context, _bloc.failure.key),
+                subtitle: getString(context, _bloc.failure!.key ?? ''),
                 onTap: () => requestFaqs(),
               );
             } else {

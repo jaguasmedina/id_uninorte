@@ -14,14 +14,14 @@ import 'package:identidaddigital/features/auth/domain/repositories/login_reposit
 class LoginBloc extends BaseBloc {
   // State fields.
   bool _canUseBiometrics = false;
-  AuthCredentials _storedCredentials;
+  AuthCredentials? _storedCredentials;
   final AuthCredentials _credentials = AuthCredentials();
 
   // Repositories.
   final LoginRepository _loginRepository;
 
   LoginBloc({
-    @required LoginRepository loginRepository,
+    required LoginRepository loginRepository,
   }) : _loginRepository = loginRepository;
 
   /// Whether fingerprint is avalable.
@@ -33,10 +33,10 @@ class LoginBloc extends BaseBloc {
   /// Change password.
   ValueChanged<String> get changePassword => _changePassword;
 
-  FormFieldValidator<String> get validateUsername =>
+  String? Function(String) get validateUsername =>
       utils.FormValidators.validateEmptyUsername;
 
-  FormFieldValidator<String> get validatePassword =>
+  String? Function(String) get validatePassword =>
       utils.FormValidators.validateEmptyPassword;
 
   void _changeUsername(String value) {
@@ -57,7 +57,7 @@ class LoginBloc extends BaseBloc {
       final result = await _loginRepository.requestCredentials();
       if (result.isRight()) {
         _canUseBiometrics = true;
-        _storedCredentials = result.getOrElse(null);
+        _storedCredentials = result.getOrElse(() => AuthCredentials());
       } else {
         _canUseBiometrics = false;
       }
@@ -78,8 +78,8 @@ class LoginBloc extends BaseBloc {
   /// When [useLastEntry] is set to `true`, will perform the login with
   /// the stored credentials.
   Future<Either<Failure, User>> login({bool useLastEntry = false}) async {
-    if (useLastEntry) {
-      return _loginRepository.login(_storedCredentials);
+    if (useLastEntry && _storedCredentials != null) {
+      return _loginRepository.login(_storedCredentials!);
     } else {
       return _loginRepository.login(_credentials);
     }

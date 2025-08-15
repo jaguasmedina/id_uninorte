@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class ConstrainedDialog extends StatelessWidget {
-  final Widget child;
+  final Widget? child;
 
   const ConstrainedDialog({
-    Key key,
+    Key? key,
     this.child,
   }) : super(key: key);
 

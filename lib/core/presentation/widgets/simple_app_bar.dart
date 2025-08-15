@@ -4,12 +4,12 @@ import 'package:identidaddigital/core/presentation/widgets/widgets.dart';
 class SimpleAppBar extends StatelessWidget implements PreferredSizeWidget {
   final IconData icon;
   final String title;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
   const SimpleAppBar({
-    Key key,
-    @required this.icon,
-    @required this.title,
+    Key? key,
+    required this.icon,
+    required this.title,
     this.onTap,
   }) : super(key: key);
 
@@ -24,7 +24,7 @@ class SimpleAppBar extends StatelessWidget implements PreferredSizeWidget {
         child: SizedBox(
           height: 60.0,
           child: NoFeedbackButton(
-            onTap: onTap,
+            onTap: onTap ?? () {},
             child: LabeledView(
               label: title,
               child: Icon(icon),

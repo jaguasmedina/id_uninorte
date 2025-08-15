@@ -33,7 +33,7 @@ class _PermissionNotFoundPageState extends State<PermissionNotFoundPage> {
           children: <Widget>[
             Icon(
               MyIcons.carnet,
-              color: Theme.of(context).accentColor,
+              color: Theme.of(context).colorScheme.secondary,
               size: 100.0,
             ),
             const SizedBox(height: 22.0),

@@ -9,17 +9,17 @@ import 'package:identidaddigital/core/presentation/providers/user_provider.dart'
 import 'package:identidaddigital/core/presentation/widgets/user_circle_avatar.dart';
 
 class UserAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final Color backgroundColor;
-  final Widget trailing;
+  final Color? backgroundColor;
+  final Widget? trailing;
   final VoidCallback onLeadingPressed;
 
   static const preferredHeight = 60.0;
 
   const UserAppBar({
-    Key key,
+    Key? key,
     this.backgroundColor,
     this.trailing,
-    @required this.onLeadingPressed,
+    required this.onLeadingPressed,
   }) : super(key: key);
 
   @override
@@ -29,7 +29,7 @@ class UserAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     final children = <Widget>[_buildAvatar(context)];
     if (trailing != null) {
-      children.add(Flexible(child: trailing));
+      children.add(Flexible(child: trailing!));
     }
     return DayNightAnnotatedRegion(
       brightness: Brightness.light,
@@ -77,9 +77,9 @@ class NoFeedbackButton extends StatelessWidget {
   final VoidCallback onTap;
 
   const NoFeedbackButton({
-    Key key,
-    @required this.onTap,
-    @required this.child,
+    Key? key,
+    required this.onTap,
+    required this.child,
   }) : super(key: key);
 
   @override

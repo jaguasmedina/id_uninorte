@@ -26,13 +26,13 @@ class SettingsRepositoryImpl extends Repository implements SettingsRepository {
   final SecureStorageDataSource secureStorage;
 
   SettingsRepositoryImpl({
-    @required this.packageInfo,
-    @required this.preferences,
-    @required this.biometrics,
-    @required this.deviceService,
-    @required this.profileService,
-    @required this.networkInfo,
-    @required this.secureStorage,
+    required this.packageInfo,
+    required this.preferences,
+    required this.biometrics,
+    required this.deviceService,
+    required this.profileService,
+    required this.networkInfo,
+    required this.secureStorage,
   });
 
   @override
@@ -61,7 +61,8 @@ class SettingsRepositoryImpl extends Repository implements SettingsRepository {
     return runCatching(() async {
       try {
         await networkInfo.ensureConnection();
-        final email = preferences.userEmail ?? preferences.user.currentEmail;
+        final email =
+            preferences.userEmail ?? preferences.user?.currentEmail ?? '';
         await deviceService.unlinkDevice(email);
         await secureStorage.deleteCredentials();
         await logout();
@@ -79,7 +80,7 @@ class SettingsRepositoryImpl extends Repository implements SettingsRepository {
     return preferences.clearUserData();
   }
 
-  @override
+    @override
   Future<Either<Failure, Unit>> sendMessage(Message message) {
     return runCatching(() async {
       await networkInfo.ensureConnection();

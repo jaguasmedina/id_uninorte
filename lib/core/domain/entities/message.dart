@@ -1,8 +1,8 @@
 import 'package:equatable/equatable.dart';
 
 class Message extends Equatable {
-  final String sender;
-  final String content;
+  final String? sender;
+  final String? content;
 
   const Message({
     this.sender,
@@ -10,5 +10,5 @@ class Message extends Equatable {
   });
 
   @override
-  List<Object> get props => [sender, content];
+  List<Object?> get props => [sender, content];
 }

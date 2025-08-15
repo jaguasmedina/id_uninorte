@@ -14,8 +14,8 @@ import 'package:identidaddigital/core/navigation/app_navigator.dart';
 import 'package:identidaddigital/core/theme/app_theme.dart';
 
 class App extends StatelessWidget {
-  Locale _localeResolutionCallback(
-    Locale locale,
+  Locale? _localeResolutionCallback(
+    Locale? locale,
     Iterable<Locale> supportedLocales,
   ) {
     if (locale == null) {
@@ -35,14 +35,14 @@ class App extends StatelessWidget {
 
   String _generateTitle(BuildContext context) => getString(context, 'app_name');
 
-  Widget _builder(BuildContext context, Widget child) {
+  Widget _builder(BuildContext context, Widget? child) {
     return MediaQuery(
       data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
       child: ScrollConfiguration(
         behavior: NeverOverScrollBehavior(),
         child: AppTheme(
           data: AppThemeData.light(),
-          child: child,
+          child: child ?? const SizedBox.shrink(),
         ),
       ),
     );

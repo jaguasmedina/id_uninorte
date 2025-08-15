@@ -8,17 +8,17 @@ class ProfileSelector extends StatelessWidget {
   final Color color;
   final List<UserProfile> profiles;
   final bool showActions;
-  final ValueChanged<int> onProfileChanged;
+  final ValueChanged<int>? onProfileChanged;
   final VoidCallback onNextPressed;
   final VoidCallback onPrevPressed;
 
   const ProfileSelector({
-    Key key,
-    @required this.controller,
-    @required this.color,
-    @required this.profiles,
-    @required this.onNextPressed,
-    @required this.onPrevPressed,
+    Key? key,
+    required this.controller,
+    required this.color,
+    required this.profiles,
+    required this.onNextPressed,
+    required this.onPrevPressed,
     this.onProfileChanged,
     this.showActions = true,
   }) : super(key: key);
@@ -83,17 +83,17 @@ class ProfileSelector extends StatelessWidget {
 
 class _IconButton extends StatelessWidget {
   final IconData icon;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
   const _IconButton({
-    Key key,
-    @required this.icon,
+    Key? key,
+    required this.icon,
     this.onTap,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onTap,
+      onTap: onTap ?? () {},
       child: SizedBox(
         height: double.infinity,
         child: Icon(icon),

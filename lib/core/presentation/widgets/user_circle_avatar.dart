@@ -5,8 +5,8 @@ class UserCircleAvatar extends StatelessWidget {
 
   /// Construct a circle clipped widget. The size is given by its parent.
   const UserCircleAvatar({
-    Key key,
-    @required this.child,
+    Key? key,
+    required this.child,
   }) : super(key: key);
 
   @override

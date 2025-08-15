@@ -13,17 +13,17 @@ class AppConfig {
   /// Api access key.
   final String apiKey;
 
-  static AppConfig _instance;
+  static late AppConfig _instance;
 
   AppConfig({
-    @required this.apiUrl,
-    @required this.apiKey,
+    required this.apiUrl,
+    required this.apiKey,
   });
 
   factory AppConfig.fromMap(Map map) {
     return AppConfig(
-      apiUrl: map['api_url'],
-      apiKey: map['api_access_key'],
+      apiUrl: map['api_url'] ?? '',
+      apiKey: map['api_access_key'] ?? '',
     );
   }
 

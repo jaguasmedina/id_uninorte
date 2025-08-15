@@ -8,7 +8,7 @@ abstract class AnalyticsLogger {
 
 @LazySingleton(as: AnalyticsLogger)
 class AnalyticsLoggerImpl implements AnalyticsLogger {
-  final _analytics = FirebaseAnalytics();
+  final _analytics = FirebaseAnalytics.instance;
 
   @override
   Future<void> logEvent(AppEvent event) async {
@@ -23,7 +23,7 @@ class AnalyticsLoggerImpl implements AnalyticsLogger {
   @override
   Future<void> setUser(User user) async {
     try {
-      await _analytics.setUserId(user.id);
+      await _analytics.setUserId(id: user.id);
       await _analytics.setUserProperty(name: 'email', value: user.currentEmail);
       await _analytics.setUserProperty(name: 'name', value: user.name);
     } catch (_) {}

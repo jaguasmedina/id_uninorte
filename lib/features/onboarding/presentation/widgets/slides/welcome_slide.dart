@@ -55,8 +55,8 @@ class WelcomeSlide extends StatelessWidget {
   }
 
   Widget _buildInternalExplanation(BuildContext context) {
-    return Row(
-      children: const <Widget>[
+    return const Row(
+      children: <Widget>[
         Expanded(
           flex: 3,
           child: BodyRichText(
@@ -89,7 +89,7 @@ class WelcomeSlide extends StatelessWidget {
             child: Icon(
               MyIcons.externalUser,
               size: 50.0,
-              color: Theme.of(context).accentColor,
+              color: Theme.of(context).colorScheme.secondary,
             ),
           ),
         ),

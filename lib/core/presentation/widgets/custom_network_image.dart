@@ -7,15 +7,15 @@ class CustomNetworkImage extends StatelessWidget {
   final String data;
 
   /// Widget displayed while the [data] is loading.
-  final Widget placeholder;
+  final Widget? placeholder;
 
   final BoxFit fit;
 
   static const fadeDuration = Duration(milliseconds: 300);
 
   const CustomNetworkImage({
-    Key key,
-    @required this.data,
+    Key? key,
+    required this.data,
     this.fit = BoxFit.contain,
     this.placeholder,
   }) : super(key: key);

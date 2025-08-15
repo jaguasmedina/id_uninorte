@@ -12,10 +12,10 @@ class AppLocalizations {
       _AppLocalizationsDelegate();
   AppLocalizations(this.locale);
 
-  Map<String, String> _localizedStrings;
+  late Map<String, String> _localizedStrings;
 
   static AppLocalizations of(BuildContext context) {
-    return Localizations.of<AppLocalizations>(context, AppLocalizations);
+    return Localizations.of<AppLocalizations>(context, AppLocalizations)!;
   }
 
   Future<bool> load() async {
@@ -38,7 +38,7 @@ class AppLocalizations {
       localizedText != null,
       'Trying to access a string resource that does not exist: $key',
     );
-    return localizedText;
+    return localizedText!;
   }
 }
 

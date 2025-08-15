@@ -12,7 +12,7 @@ import 'package:identidaddigital/di/injection.dart';
 class UploadPicturePage extends StatefulWidget {
   final File picture;
 
-  const UploadPicturePage({Key key, @required this.picture}) : super(key: key);
+  const UploadPicturePage({Key? key, required this.picture}) : super(key: key);
 
   /// Un-named route for [UploadPicturePage].
   static Route<T> route<T>(File file) {
@@ -36,7 +36,7 @@ class _UploadPicturePageState extends State<UploadPicturePage> {
 
   Future<void> _uploadPicture() async {
     final localizations = AppLocalizations.of(context);
-    DialogManager.showLoading(context: context);
+    DialogManager.showLoading(context: context, title: '');
     final result = await _bloc.uploadPicture(widget.picture);
     Navigator.of(context).pop();
     result.fold(
@@ -44,7 +44,7 @@ class _UploadPicturePageState extends State<UploadPicturePage> {
         DialogManager.showMessage(
           context: context,
           title: localizations.translate('error_title'),
-          message: localizations.translate(failure.key),
+          message: localizations.translate(failure.key ?? ''),
         );
       },
       (_) async {

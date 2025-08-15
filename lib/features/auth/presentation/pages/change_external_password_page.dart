@@ -33,10 +33,10 @@ class _ChangeExternalPasswordPageState
   }
 
   Future<void> _validateForm() async {
-    if (_form.currentState.validate()) {
-      _form.currentState.save();
+    if (_form.currentState?.validate() ?? false) {
+      _form.currentState?.save();
       final userProvider = Provider.of<UserProvider>(context, listen: false);
-      _bloc.changeUsername(userProvider.user.emailExt);
+      _bloc.changeUsername(userProvider.user?.emailExt ?? '');
       FocusScope.of(context).unfocus();
       await _changePassword();
     }
@@ -44,7 +44,10 @@ class _ChangeExternalPasswordPageState
 
   Future<void> _changePassword() async {
     final localizations = AppLocalizations.of(context);
-    DialogManager.showLoading(context: context);
+    DialogManager.showLoading(
+      context: context,
+      title: localizations.translate('loading'),
+    );
     final result = await _bloc.changePasswordForExternalUser();
     if (!mounted) return;
     Navigator.of(context).pop();
@@ -53,7 +56,7 @@ class _ChangeExternalPasswordPageState
         DialogManager.showMessage(
           context: context,
           title: localizations.translate('error_title'),
-          message: localizations.translate(failure.key),
+          message: localizations.translate(failure.key ?? ''),
         );
       },
       (r) {
@@ -88,7 +91,7 @@ class _ChangeExternalPasswordPageState
                 children: <Widget>[
                   Icon(
                     MyIcons.password,
-                    color: Theme.of(context).accentColor,
+                    color: Theme.of(context).colorScheme.secondary,
                     size: 96.0,
                   ),
                   const SizedBox(height: 22.0, width: double.infinity),
@@ -126,12 +129,13 @@ class _ChangeExternalPasswordPageState
                       obscureText: true,
                       inputFormatters: [WhiteSpaceTextInputFormatter()],
                       validator: (value) {
+                        if (value == null) return null;
                         final result =
                             FormValidators.validatePasswordPattern(value);
                         if (result == null) return result;
                         return localizations.translate(result);
                       },
-                      onSaved: _bloc.changePassword,
+                      onSaved: (value) => _bloc.changePassword(value ?? ''),
                     ),
                   ),
                   const SizedBox(height: 24.0),

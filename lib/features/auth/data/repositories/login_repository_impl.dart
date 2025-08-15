@@ -30,14 +30,14 @@ class LoginRepositoryImpl extends Repository implements LoginRepository {
   final AnalyticsLogger analyticsLogger;
 
   LoginRepositoryImpl({
-    @required this.authService,
-    @required this.profileService,
-    @required this.secureStorage,
-    @required this.biometrics,
-    @required this.preferences,
-    @required this.networkInfo,
-    @required this.deviceInfo,
-    @required this.analyticsLogger,
+    required this.authService,
+    required this.profileService,
+    required this.secureStorage,
+    required this.biometrics,
+    required this.preferences,
+    required this.networkInfo,
+    required this.deviceInfo,
+    required this.analyticsLogger,
   });
 
   @override
@@ -55,7 +55,7 @@ class LoginRepositoryImpl extends Repository implements LoginRepository {
         device: device,
       );
 
-      analyticsLogger.logEvent(LoginAttempt(authCredentials.username));
+      analyticsLogger.logEvent(LoginAttempt(authCredentials.username!));
       final data = await authService.login(request);
 
       final userModel = data.value1;

@@ -6,13 +6,13 @@ class AnimationNotifier extends InheritedWidget {
   final bool isAnimating;
 
   const AnimationNotifier({
-    Key key,
-    this.child,
+    Key? key,
+    required this.child,
     this.isAnimating = false,
   }) : super(key: key, child: child);
 
   static AnimationNotifier of(BuildContext context) {
-    return context.dependOnInheritedWidgetOfExactType<AnimationNotifier>();
+    return context.dependOnInheritedWidgetOfExactType<AnimationNotifier>()!;
   }
 
   @override

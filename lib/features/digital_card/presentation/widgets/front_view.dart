@@ -18,19 +18,19 @@ class FrontView extends StatelessWidget {
   final Color profileColor;
   final bool showRolControllers;
   final Stream<String> clockStream;
-  final VoidCallback onNextProfile;
-  final VoidCallback onPrevProfile;
-  final ValueChanged<int> onProfileChanged;
+  final VoidCallback? onNextProfile;
+  final VoidCallback? onPrevProfile;
+  final ValueChanged<int>? onProfileChanged;
 
   const FrontView({
-    Key key,
-    @required this.clockStream,
-    @required this.photo,
-    @required this.name,
-    @required this.id,
-    @required this.profileController,
-    @required this.profiles,
-    @required this.profileColor,
+    Key? key,
+    required this.clockStream,
+    required this.photo,
+    required this.name,
+    required this.id,
+    required this.profileController,
+    required this.profiles,
+    required this.profileColor,
     this.onNextProfile,
     this.onPrevProfile,
     this.onProfileChanged,
@@ -81,7 +81,7 @@ class FrontView extends StatelessWidget {
         initialData: utils.DateFormatter.formatNow(),
         builder: (context, snapshot) {
           return Text(
-            snapshot.data,
+            snapshot.data ?? '',
             textAlign: TextAlign.center,
             style: const TextStyle(
               color: Colors.white,
@@ -161,9 +161,9 @@ class FrontView extends StatelessWidget {
       controller: profileController,
       color: profileColor,
       profiles: profiles,
-      onPrevPressed: onPrevProfile,
-      onNextPressed: onNextProfile,
-      onProfileChanged: onProfileChanged,
+      onPrevPressed: onPrevProfile ?? () {},
+      onNextPressed: onNextProfile ?? () {},
+      onProfileChanged: onProfileChanged ?? (_) {},
       showActions: showRolControllers,
     );
   }

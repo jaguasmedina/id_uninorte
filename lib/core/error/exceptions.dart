@@ -13,7 +13,7 @@ class NetworkException extends AppException {
 class ServerException extends AppException {
   final String message;
 
-  ServerException([this.message]);
+  ServerException([this.message = '']);
 
   @override
   Failure toFailure() => ServerFailure(message);

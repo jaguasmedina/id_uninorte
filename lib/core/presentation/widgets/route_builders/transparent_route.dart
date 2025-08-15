@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
 class TransparentRoute<T> extends PageRouteBuilder<T> {
-  final Widget child;
-  TransparentRoute({this.child})
+  final Widget? child;
+  TransparentRoute({required this.child})
       : super(
           pageBuilder: (
             BuildContext context,
             Animation<double> animation,
             Animation<double> secondaryAnimation,
           ) {
-            return child;
+            return child!;
           },
           transitionsBuilder: (
             BuildContext context,

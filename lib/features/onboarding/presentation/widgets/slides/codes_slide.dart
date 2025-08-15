@@ -2,6 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:barcode_widget/barcode_widget.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
+/// Slide de onboarding que muestra ejemplos de códigos de barras y QR.
+///
+/// **Cambios realizados para mejorar la consistencia:**
+/// - **Problema identificado**: El código QR en el slide no tenía tamaño especificado
+/// - **Solución aplicada**: Especificación del tamaño del QR a 120.0 píxeles
+/// - **Beneficio**: Consistencia visual con otros QR en la aplicación
+///
+/// **Características:**
+/// - Tamaño QR: 120.0 x 120.0 píxeles
+/// - Responsive: Se adapta al 36% del ancho de la pantalla
+/// - Contenido: Ejemplo de código de barras y QR para demostración
+
 import 'package:identidaddigital/features/onboarding/presentation/widgets/widgets.dart';
 
 class CodesSlide extends StatelessWidget {
@@ -29,6 +41,7 @@ class CodesSlide extends StatelessWidget {
               ),
               const SizedBox(height: 24.0),
               const BodyRichText(
+                key: Key('codes_slide_1'),
                 children: [
                   TextSpan(
                     text:
@@ -45,12 +58,14 @@ class CodesSlide extends StatelessWidget {
             children: <Widget>[
               FractionallySizedBox(
                 widthFactor: 0.36,
-                child: QrImage(
+                child: QrImageView(
                   data: 'Hola',
+                  size: 120.0,
                 ),
               ),
               const SizedBox(height: 24.0),
               const BodyRichText(
+                key: Key('codes_slide_2'),
                 children: [
                   TextSpan(text: 'Utiliza tu '),
                   BoldTextSpan(text: 'código QR'),

@@ -20,7 +20,7 @@ class AppNavigator {
   static GlobalKey<NavigatorState> get navigatorKey => _navigatorKey;
 
   /// Global App Navigator.
-  static NavigatorState get navigator => navigatorKey.currentState;
+  static NavigatorState get navigator => navigatorKey.currentState!;
 
   /// Generate the corresponding route when app is navigated
   /// to a named route.
@@ -40,7 +40,8 @@ class AppNavigator {
         if (args is LoginReason) {
           return FadeRoute<dynamic>(LoginPage(reason: args));
         }
-        return FadeRoute<dynamic>(const LoginPage());
+        return FadeRoute<dynamic>(
+            LoginPage()); // ignore: prefer_const_constructors
 
       case Destinations.profilePicture:
         return MaterialPageRoute<dynamic>(builder: (_) => ProfilePicturePage());
@@ -50,7 +51,7 @@ class AppNavigator {
 
       default:
         return _errorRoute(
-          settings.name,
+          settings.name ?? 'unknown',
           'No route defined for ${settings.name}',
         );
     }

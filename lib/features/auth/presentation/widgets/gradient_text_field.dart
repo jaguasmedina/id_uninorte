@@ -5,21 +5,21 @@ import 'package:identidaddigital/core/presentation/widgets/widgets.dart';
 
 class GradientTextFormField extends FormField<String> {
   GradientTextFormField({
-    Key key,
-    String initialValue,
-    String hintText,
+    Key? key,
+    String? initialValue,
+    String? hintText,
     bool obscureText = false,
     AutovalidateMode autovalidateMode = AutovalidateMode.disabled,
-    FocusNode focusNode,
-    TextInputType keyboardType,
-    TextInputAction textInputAction,
-    ValueChanged<String> onChanged,
-    ValueChanged<String> onSaved,
-    ValueChanged<String> onFieldSubmitted,
-    FormFieldValidator<String> validator,
+    FocusNode? focusNode,
+    TextInputType? keyboardType,
+    TextInputAction? textInputAction,
+    ValueChanged<String>? onChanged,
+    ValueChanged<String>? onSaved,
+    ValueChanged<String>? onFieldSubmitted,
+    FormFieldValidator<String>? validator,
   }) : super(
           key: key,
-          onSaved: onSaved,
+          onSaved: onSaved != null ? (value) => onSaved(value ?? '') : null,
           validator: validator,
           initialValue: initialValue,
           autovalidateMode: autovalidateMode,
@@ -33,7 +33,7 @@ class GradientTextFormField extends FormField<String> {
 
             return GradientTextField(
               initialValue: field.value,
-              hintText: hintText,
+              hintText: hintText ?? '',
               obscureText: obscureText,
               focusNode: focusNode,
               keyboardType: keyboardType,
@@ -50,19 +50,19 @@ class GradientTextFormField extends FormField<String> {
 class GradientTextField extends StatelessWidget {
   final bool obscureText;
   final bool hasError;
-  final String errorText;
-  final String initialValue;
-  final String hintText;
-  final FocusNode focusNode;
-  final TextInputType keyboardType;
-  final TextInputAction textInputAction;
-  final ValueChanged<String> onChanged;
-  final ValueChanged<String> onSaved;
-  final ValueChanged<String> onFieldSubmitted;
-  final FormFieldValidator<String> validator;
+  final String? errorText;
+  final String? initialValue;
+  final String? hintText;
+  final FocusNode? focusNode;
+  final TextInputType? keyboardType;
+  final TextInputAction? textInputAction;
+  final ValueChanged<String>? onChanged;
+  final ValueChanged<String>? onSaved;
+  final ValueChanged<String>? onFieldSubmitted;
+  final FormFieldValidator<String>? validator;
 
   const GradientTextField({
-    Key key,
+    Key? key,
     this.initialValue,
     this.hintText = '',
     this.errorText,
@@ -70,7 +70,7 @@ class GradientTextField extends StatelessWidget {
     this.obscureText = false,
     this.focusNode,
     this.keyboardType,
-    this.textInputAction = TextInputAction.done,
+    this.textInputAction,
     this.onSaved,
     this.onChanged,
     this.onFieldSubmitted,
@@ -114,7 +114,7 @@ class GradientTextField extends StatelessWidget {
         textInputAction: textInputAction,
         onFieldSubmitted: onFieldSubmitted,
         onChanged: onChanged,
-        onSaved: onSaved,
+        onSaved: onSaved != null ? (value) => onSaved!(value ?? '') : null,
         validator: validator,
         inputFormatters: <TextInputFormatter>[
           WhiteSpaceTextInputFormatter(),
@@ -126,7 +126,7 @@ class GradientTextField extends StatelessWidget {
             vertical: 10.0,
           ),
           border: InputBorder.none,
-          hintText: hintText,
+          hintText: hintText ?? '',
         ),
       ),
     );
@@ -136,11 +136,11 @@ class GradientTextField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 3.0, left: 2.0),
       child: Text(
-        errorText,
+        errorText ?? '',
         textAlign: TextAlign.left,
         style: TextStyle(
           fontSize: 12.0,
-          color: Theme.of(context).errorColor,
+          color: Theme.of(context).colorScheme.error,
         ),
       ),
     );

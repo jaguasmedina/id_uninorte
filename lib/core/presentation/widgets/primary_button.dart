@@ -5,9 +5,9 @@ class PrimaryButton extends StatelessWidget {
   final VoidCallback onPressed;
 
   const PrimaryButton({
-    Key key,
-    @required this.title,
-    @required this.onPressed,
+    Key? key,
+    required this.title,
+    required this.onPressed,
   }) : super(key: key);
 
   @override
@@ -15,8 +15,8 @@ class PrimaryButton extends StatelessWidget {
     return TextButton(
       onPressed: onPressed,
       style: TextButton.styleFrom(
-        primary: Colors.white,
-        backgroundColor: Theme.of(context).accentColor,
+        foregroundColor: Colors.white,
+        backgroundColor: Theme.of(context).colorScheme.secondary,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
         padding: const EdgeInsets.symmetric(horizontal: 16),
       ),

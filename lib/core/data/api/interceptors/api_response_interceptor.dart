@@ -18,7 +18,33 @@ class ApiResponseInterceptor extends BaseApiResponseInterceptor {
       }
 
       if (response.statusCode == 200) {
+        // Manejar respuesta vacía o nula del servidor
+        if (response.body.isEmpty || response.body == 'null') {
+          // Crear una respuesta exitosa con datos nulos
+          return ApiResponse<T>(
+            status: ResponseStatus(code: 1, message: 'Success'),
+            data: null as T,
+          );
+        }
+
         final dynamic content = json.decode(response.body);
+
+        // Manejar caso donde el contenido es null o no es un Map
+        if (content == null) {
+          return ApiResponse<T>(
+            status: ResponseStatus(code: 1, message: 'Success'),
+            data: null as T,
+          );
+        }
+
+        // Si el contenido no es un Map, crear una respuesta exitosa
+        if (content is! Map) {
+          return ApiResponse<T>(
+            status: ResponseStatus(code: 1, message: 'Success'),
+            data: content as T,
+          );
+        }
+
         final apiResponse = ApiResponse<T>.fromMap(content);
         if (apiResponse.status.code == 400) {
           throw SessionExpiredException();

@@ -23,12 +23,12 @@ class LoginReason {
 }
 
 class LoginPage extends StatefulWidget {
-  final LoginReason reason;
+  final LoginReason? reason;
 
-  const LoginPage({Key key, this.reason}) : super(key: key);
+  const LoginPage({Key? key, this.reason}) : super(key: key);
 
   /// Un-named route for [LoginPage].
-  static Route route({LoginReason reason}) {
+  static Route route({LoginReason? reason}) {
     return MaterialPageRoute<dynamic>(
       builder: (context) => LoginPage(reason: reason),
     );
@@ -67,8 +67,8 @@ class _LoginPageState extends State<LoginPage> {
     if (widget.reason != null) {
       DialogManager.showMessage(
         context: context,
-        title: widget.reason.title,
-        message: widget.reason.subtitle,
+        title: widget.reason?.title ?? '',
+        message: widget.reason?.subtitle ?? '',
       );
     }
   }
@@ -93,8 +93,8 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _handleForm() {
-    if (_formKey.currentState.validate()) {
-      _formKey.currentState.save();
+    if (_formKey.currentState?.validate() ?? false) {
+      _formKey.currentState?.save();
       _login();
     }
   }
@@ -103,7 +103,10 @@ class _LoginPageState extends State<LoginPage> {
     FocusScope.of(context)
         .unfocus(disposition: UnfocusDisposition.previouslyFocusedChild);
     final localizations = AppLocalizations.of(context);
-    DialogManager.showLoading(context: context);
+    DialogManager.showLoading(
+      context: context,
+      title: localizations.translate('loading'),
+    );
     final result = await _bloc.login(useLastEntry: useLastEntry);
     AppNavigator.navigator.pop();
     result.fold(
@@ -118,13 +121,13 @@ class _LoginPageState extends State<LoginPage> {
           DialogManager.showMessage(
             context: context,
             title: localizations.translate('error_title'),
-            message: localizations.translate(failure.key),
+            message: localizations.translate(failure.key ?? ''),
           );
         } else {
           DialogManager.showMessage(
             context: context,
             title: localizations.translate('error_title'),
-            message: localizations.translate(failure.key),
+            message: localizations.translate(failure.key ?? ''),
           );
         }
       },
@@ -190,9 +193,9 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _buildLogo() {
-    return const EntranceFader(
-      offset: Offset(0.0, -32.0),
-      delay: Duration(milliseconds: 300),
+    return EntranceFader(
+      offset: const Offset(0.0, -32.0),
+      delay: const Duration(milliseconds: 300),
       child: LogoView(),
     );
   }
@@ -230,8 +233,8 @@ class _LoginPageState extends State<LoginPage> {
         textInputAction: TextInputAction.next,
         hintText: localizations.translate('user_placeholder'),
         onSaved: _bloc.changeUsername,
-        validator: (String value) {
-          final result = _bloc.validateUsername(value);
+        validator: (String? value) {
+          final result = _bloc.validateUsername(value ?? '');
           if (result == null) return result;
           return localizations.translate(result);
         },
@@ -253,8 +256,8 @@ class _LoginPageState extends State<LoginPage> {
         focusNode: _passwordFocusNode,
         textInputAction: TextInputAction.done,
         hintText: localizations.translate('password_placeholder'),
-        validator: (String value) {
-          final result = _bloc.validatePassword(value);
+        validator: (String? value) {
+          final result = _bloc.validatePassword(value ?? '');
           if (result == null) return result;
           return localizations.translate(result);
         },
@@ -267,11 +270,8 @@ class _LoginPageState extends State<LoginPage> {
     return EntranceFader(
       delay: const Duration(milliseconds: 750),
       child: GestureDetector(
-        onTap: () => launchUrl(
-          Uri.parse(
-            'https://sandia.uninorte.edu.co/sandi/solicitar_clave.php',
-          ),
-          mode: LaunchMode.externalApplication,
+        onTap: () => launch(
+          'https://sandia.uninorte.edu.co/sandi/solicitar_clave.php',
         ),
         child: Row(
           children: const [

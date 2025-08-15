@@ -1,8 +1,6 @@
 {
   "dart.flutterSdkPath": ".fvm/flutter_sdk",
   "workbench.startupEditor": "newUntitledFile",
-  "workbench.iconTheme": "material-icon-theme",
-  "workbench.colorTheme": "Shades of Purple (Super Dark)",
   "material-icon-theme.activeIconPack": "react_redux",
   "material-icon-theme.folders.associations": {
     "features": "other",

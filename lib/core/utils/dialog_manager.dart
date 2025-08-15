@@ -4,8 +4,8 @@ import 'package:identidaddigital/core/presentation/widgets/widgets.dart';
 class DialogManager {
   /// Shows a non dismissible loading pop-up.
   static Future<void> showLoading({
-    @required BuildContext context,
-    String title,
+    required BuildContext context,
+    required String title,
   }) {
     return _showGeneralDialog(
       context: context,
@@ -21,10 +21,10 @@ class DialogManager {
 
   /// Shows a dismissible pop-up with a single action.
   static Future<void> showMessage({
-    @required BuildContext context,
-    String title,
-    String message,
-    String buttonText,
+    required BuildContext context,
+    String? title,
+    String? message,
+    String? buttonText,
   }) {
     return _showGeneralDialog(
       context: context,
@@ -42,11 +42,11 @@ class DialogManager {
 
   /// Shows a dismissible pop-up with actions.
   static Future<bool> showAskDialog({
-    @required BuildContext context,
-    @required String message,
-    IconData icon,
-    String confirmText,
-    String cancelText,
+    required BuildContext context,
+    required String message,
+    IconData? icon,
+    String? confirmText,
+    String? cancelText,
   }) async {
     return await _showGeneralDialog<bool>(
           context: context,
@@ -65,9 +65,9 @@ class DialogManager {
         false;
   }
 
-  static Future<T> showMyGeneralDialog<T>({
-    @required BuildContext context,
-    @required WidgetBuilder builder,
+  static Future<T?> showMyGeneralDialog<T>({
+    required BuildContext context,
+    required WidgetBuilder builder,
     bool barrierDismissible = true,
   }) =>
       _showGeneralDialog(
@@ -77,9 +77,9 @@ class DialogManager {
       );
 
   /// Shows a custom animated dialog.
-  static Future<T> _showGeneralDialog<T>({
-    @required BuildContext context,
-    @required WidgetBuilder builder,
+  static Future<T?> _showGeneralDialog<T>({
+    required BuildContext context,
+    required WidgetBuilder builder,
     bool barrierDismissible = true,
   }) {
     return showGeneralDialog<T>(

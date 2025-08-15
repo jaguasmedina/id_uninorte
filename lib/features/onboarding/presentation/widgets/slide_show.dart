@@ -4,12 +4,12 @@ import 'package:identidaddigital/features/onboarding/presentation/widgets/slide_
 
 class SlideShow extends StatefulWidget {
   final List<Widget> slides;
-  final VoidCallback onSkipped;
-  final VoidCallback onDone;
+  final VoidCallback? onSkipped;
+  final VoidCallback? onDone;
 
   const SlideShow({
-    Key key,
-    @required this.slides,
+    Key? key,
+    required this.slides,
     this.onSkipped,
     this.onDone,
   }) : super(key: key);
@@ -24,7 +24,7 @@ class _SlideShowState extends State<SlideShow> {
   void initState() {
     super.initState();
     _controller.addListener(() {
-      if (_controller.page.round() >= widget.slides.length - 1) {
+      if ((_controller.page?.round() ?? 0) >= widget.slides.length - 1) {
         // _isCompleted = true;
       }
     });
@@ -59,7 +59,7 @@ class _SlideShowState extends State<SlideShow> {
             ),
             AnimatedBuilder(
               animation: _controller,
-              builder: (BuildContext context, Widget child) {
+              builder: (BuildContext context, Widget? child) {
                 return SlideIndicator(
                   currentSlide: _controller.page ?? 0,
                   length: widget.slides.length,

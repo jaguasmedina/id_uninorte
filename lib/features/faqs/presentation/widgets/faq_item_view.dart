@@ -12,7 +12,7 @@ class FaqItemView extends StatefulWidget {
 
   const FaqItemView(
     this.faq, {
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -40,7 +40,7 @@ class _FaqItemViewState extends State<FaqItemView> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               _TitleRow(
-                title: widget.faq.title,
+                title: widget.faq.title ?? '',
                 iconAngle: value * pi,
                 onTap: _toggle,
               ),
@@ -50,7 +50,7 @@ class _FaqItemViewState extends State<FaqItemView> {
                   alignment: Alignment.centerLeft,
                   child: Padding(
                     padding: const EdgeInsets.only(bottom: 12.0),
-                    child: _ContentText(widget.faq.content),
+                    child: _ContentText(widget.faq.content ?? ''),
                   ),
                 ),
               ),
@@ -69,10 +69,10 @@ class _TitleRow extends StatelessWidget {
   final VoidCallback onTap;
 
   const _TitleRow({
-    Key key,
-    @required this.title,
-    @required this.iconAngle,
-    @required this.onTap,
+    Key? key,
+    required this.title,
+    required this.iconAngle,
+    required this.onTap,
   }) : super(key: key);
 
   @override
@@ -115,8 +115,8 @@ class _ContentText extends StatelessWidget {
 
     return Linkify(
       text: text,
-      linkStyle: theme.textTheme.bodyText2.copyWith(
-        color: theme.accentColor,
+      linkStyle: theme.textTheme.bodyMedium?.copyWith(
+        color: theme.colorScheme.secondary,
       ),
       onOpen: (link) {
         IntentManager.launchUrl(link.url);

@@ -6,15 +6,15 @@ import 'package:identidaddigital/core/presentation/widgets/secondary_button.dart
 import 'package:identidaddigital/core/presentation/widgets/widgets.dart';
 
 class ActionDialog extends StatelessWidget {
-  final IconData icon;
+  final IconData? icon;
   final String message;
-  final String confirmText;
-  final String cancelText;
-  final VoidCallback onConfirmed;
-  final VoidCallback onCanceled;
+  final String? confirmText;
+  final String? cancelText;
+  final VoidCallback? onConfirmed;
+  final VoidCallback? onCanceled;
 
   const ActionDialog({
-    @required this.message,
+    required this.message,
     this.confirmText,
     this.cancelText,
     this.onConfirmed,
@@ -54,7 +54,7 @@ class ActionDialog extends StatelessWidget {
       child: Icon(
         icon,
         size: 40.0,
-        color: Theme.of(context).accentColor,
+        color: Theme.of(context).colorScheme.secondary,
       ),
     );
   }
@@ -63,7 +63,7 @@ class ActionDialog extends StatelessWidget {
     return Text(
       message,
       textAlign: TextAlign.center,
-      style: Theme.of(context).textTheme.bodyText2.copyWith(
+      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
             fontWeight: FontWeight.w600,
             fontSize: 18.0,
           ),
@@ -77,14 +77,14 @@ class ActionDialog extends StatelessWidget {
         Expanded(
           child: SecondaryButton(
             title: cancelText ?? localizations.translate('cancel'),
-            onPressed: onCanceled,
+            onPressed: onCanceled ?? () {},
           ),
         ),
         const SizedBox(width: 32.0),
         Expanded(
           child: PrimaryButton(
             title: confirmText ?? localizations.translate('accept'),
-            onPressed: onConfirmed,
+            onPressed: onConfirmed ?? () {},
           ),
         ),
       ],

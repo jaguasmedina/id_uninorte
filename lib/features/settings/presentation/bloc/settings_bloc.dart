@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:meta/meta.dart';
 import 'package:injectable/injectable.dart';
 
 import 'package:identidaddigital/core/enums/enums.dart';
@@ -9,7 +8,8 @@ import 'package:identidaddigital/features/settings/domain/repositories/settings_
 
 @injectable
 class SettingsBloc extends BaseBloc {
-  bool _biometricAccessEnabled, _areBiometricsSupported = false;
+  bool _biometricAccessEnabled = false;
+  bool _areBiometricsSupported = false;
   final SettingsRepository _settingsRepository;
 
   SettingsBloc(this._settingsRepository);
@@ -25,7 +25,7 @@ class SettingsBloc extends BaseBloc {
     setState(PageState.idle);
   }
 
-  void changeBiometricAccessEnabled({@required bool isEnabled}) {
+  void changeBiometricAccessEnabled({required bool isEnabled}) {
     _biometricAccessEnabled = isEnabled;
     _settingsRepository.biometricAccessEnabled = isEnabled;
     setState(PageState.idle);

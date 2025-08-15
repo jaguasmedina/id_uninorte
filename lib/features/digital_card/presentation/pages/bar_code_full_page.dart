@@ -10,8 +10,8 @@ class BarCodeFullPage extends StatelessWidget {
   final String barcode;
 
   const BarCodeFullPage({
-    Key key,
-    @required this.barcode,
+    Key? key,
+    required this.barcode,
   }) : super(key: key);
 
   /// Un-named route for [BarCodeFullPage].
@@ -60,8 +60,8 @@ class _BarCodeHero extends StatelessWidget {
   final Widget child;
 
   const _BarCodeHero({
-    Key key,
-    @required this.child,
+    Key? key,
+    required this.child,
   }) : super(key: key);
 
   @override
@@ -75,7 +75,7 @@ class _BarCodeHero extends StatelessWidget {
         BuildContext fromHeroContext,
         BuildContext toHeroContext,
       ) {
-        final Hero fromHero = fromHeroContext.widget;
+        final Hero fromHero = fromHeroContext.widget as Hero;
 
         final rotation = Tween(
           begin: 0.0,
@@ -84,7 +84,7 @@ class _BarCodeHero extends StatelessWidget {
 
         return AnimatedBuilder(
           animation: animation,
-          builder: (BuildContext context, Widget child) {
+          builder: (BuildContext context, Widget? child) {
             final transform = Matrix4.identity()..rotateZ(rotation.value);
             return Transform(
               alignment: Alignment.center,

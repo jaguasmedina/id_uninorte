@@ -12,15 +12,15 @@ class AppTheme extends InheritedWidget {
   final AppThemeData data;
 
   const AppTheme({
-    Key key,
-    @required this.child,
-    @required this.data,
+    Key? key,
+    required this.child,
+    required this.data,
   }) : super(key: key, child: child);
 
   static AppThemeData of(BuildContext context) {
     final inherited = context.dependOnInheritedWidgetOfExactType<AppTheme>();
     assert(inherited?.data != null);
-    return inherited.data;
+    return inherited!.data;
   }
 
   /// App's light theme.
@@ -30,8 +30,11 @@ class AppTheme extends InheritedWidget {
     brightness: Brightness.light,
     primaryColor: Colors.white,
     primarySwatch: ColorSwatchs.primarySwatch,
-    accentColor: AppColors.institutionalColor,
-    backgroundColor: Colors.white,
+    colorScheme: const ColorScheme.light(
+      primary: Colors.white,
+      secondary: AppColors.institutionalColor,
+      background: Colors.white,
+    ),
     scaffoldBackgroundColor: Colors.white,
     canvasColor: Colors.white,
     fontFamily: Fonts.primaryFont,

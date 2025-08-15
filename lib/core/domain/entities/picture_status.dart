@@ -7,13 +7,10 @@ class PictureStatus extends Equatable {
   const PictureStatus(this._status, this._message);
 
   @override
-  List<Object> get props => [_status, _message];
+  List<Object?> get props => [_status, _message];
 
   bool get isEmpty {
-    if (_status != null) {
-      return _status.isEmpty;
-    }
-    return true;
+    return _status.isEmpty;
   }
 
   bool get isPending => _status == 'Pendiente';
@@ -37,7 +34,7 @@ class PictureStatus extends Equatable {
 }
 
 class EmptyPictureStatus extends PictureStatus {
-  const EmptyPictureStatus() : super(null, null);
+  const EmptyPictureStatus() : super('', '');
 }
 
 class PendingPictureStatus extends PictureStatus {

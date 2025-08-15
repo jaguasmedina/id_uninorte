@@ -50,7 +50,7 @@ class _DeviceAlreadyRegisteredPageState
           children: <Widget>[
             Icon(
               MyIcons.multipleDevices,
-              color: Theme.of(context).accentColor,
+              color: Theme.of(context).colorScheme.secondary,
               size: 100.0,
             ),
             const SizedBox(height: 22.0, width: double.infinity),
@@ -90,13 +90,13 @@ class _DeviceAlreadyRegisteredPageState
                       await DialogManager.showMessage(
                         context: context,
                         title: localizations.translate('error_title'),
-                        message: localizations.translate(failure.key),
+                        message: localizations.translate(failure.key ?? ''),
                       );
                     } else {
                       DialogManager.showMessage(
                         context: context,
                         title: localizations.translate('error_title'),
-                        message: localizations.translate(failure.key),
+                        message: localizations.translate(failure.key ?? ''),
                       );
                     }
                   },

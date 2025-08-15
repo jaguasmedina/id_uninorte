@@ -5,9 +5,9 @@ import 'package:identidaddigital/core/utils/utils.dart' as utils;
 import 'package:identidaddigital/core/presentation/widgets/dialogs/constrained_dialog.dart';
 
 class LoadingDialog extends StatelessWidget {
-  final String title;
+  final String? title;
 
-  const LoadingDialog({Key key, this.title}) : super(key: key);
+  const LoadingDialog({Key? key, this.title}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context);

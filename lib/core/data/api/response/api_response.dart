@@ -5,14 +5,14 @@ class ApiResponse<T> {
   final T data;
 
   ApiResponse({
-    @required this.status,
-    @required this.data,
+    required this.status,
+    required this.data,
   });
 
   factory ApiResponse.fromMap(Map map) {
     return ApiResponse(
-      status: ResponseStatus.fromMap(map['status']),
-      data: map['data'],
+      status: ResponseStatus.fromMap(map['status'] ?? {}),
+      data: map['data'] ?? null,
     );
   }
 
@@ -26,14 +26,14 @@ class ResponseStatus {
   final String message;
 
   ResponseStatus({
-    @required this.code,
-    @required this.message,
+    required this.code,
+    required this.message,
   });
 
   factory ResponseStatus.fromMap(Map map) {
     return ResponseStatus(
-      code: map['code'],
-      message: map['message'],
+      code: map['code'] ?? 1,
+      message: map['message'] ?? 'Success',
     );
   }
 }

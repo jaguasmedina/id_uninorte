@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:meta/meta.dart';
 import 'package:injectable/injectable.dart';
 
 import 'package:identidaddigital/core/data/api/services/profile_service/profile_service.dart';
@@ -19,9 +18,9 @@ class DigitalCardRepositoryImpl extends Repository
   final ProfileService profileService;
 
   DigitalCardRepositoryImpl({
-    @required this.deviceInfo,
-    @required this.preferences,
-    @required this.profileService,
+    required this.deviceInfo,
+    required this.preferences,
+    required this.profileService,
   });
 
   static int _getCurrentTimeStamp() => DateTime.now().millisecondsSinceEpoch;

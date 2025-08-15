@@ -40,7 +40,7 @@ class HelpAlert extends StatelessWidget {
                   ),
                 ],
               ),
-              style: theme.textTheme.bodyText2.copyWith(
+              style: theme.textTheme.bodyMedium?.copyWith(
                 fontWeight: FontWeight.w500,
                 fontSize: 16.0,
               ),

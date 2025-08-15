@@ -8,9 +8,9 @@ class LabeledView extends StatelessWidget {
   final LabelPosition position;
 
   const LabeledView({
-    Key key,
-    @required this.child,
-    @required this.label,
+    Key? key,
+    required this.child,
+    required this.label,
     this.position = LabelPosition.right,
   }) : super(key: key);
 

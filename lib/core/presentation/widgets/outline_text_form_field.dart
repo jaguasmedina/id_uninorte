@@ -4,26 +4,26 @@ import 'package:flutter/services.dart';
 class OutlineTextFormField extends StatelessWidget {
   final bool obscureText;
   final String hintText;
-  final String errorText;
-  final int maxLines;
-  final int hintMaxLines;
+  final String? errorText;
+  final int? maxLines;
+  final int? hintMaxLines;
   final bool expands;
-  final int maxLength;
-  final TextInputType keyboardType;
-  final TextAlignVertical textAlignVertical;
+  final int? maxLength;
+  final TextInputType? keyboardType;
+  final TextAlignVertical? textAlignVertical;
   final TextCapitalization textCapitalization;
-  final List<TextInputFormatter> inputFormatters;
-  final TextEditingController controller;
-  final FormFieldValidator<String> validator;
-  final ValueChanged<String> onSaved;
+  final List<TextInputFormatter>? inputFormatters;
+  final TextEditingController? controller;
+  final FormFieldValidator<String>? validator;
+  final FormFieldSetter<String>? onSaved;
 
   const OutlineTextFormField({
-    Key key,
-    @required this.hintText,
+    Key? key,
+    required this.hintText,
     this.errorText,
     this.maxLength,
     this.obscureText = false,
-    this.maxLines = 1,
+    this.maxLines,
     this.expands = false,
     this.hintMaxLines,
     this.keyboardType,
@@ -58,6 +58,8 @@ class OutlineTextFormField extends StatelessWidget {
         border: _buildBorder(context),
         enabledBorder: _buildBorder(context),
         focusedBorder: _buildBorder(context),
+        errorBorder: _buildErrorBorder(context),
+        focusedErrorBorder: _buildErrorBorder(context),
       ),
     );
   }
@@ -65,6 +67,13 @@ class OutlineTextFormField extends StatelessWidget {
   InputBorder _buildBorder(BuildContext context) {
     return OutlineInputBorder(
       borderSide: const BorderSide(width: 2.0),
+      borderRadius: BorderRadius.circular(8.0),
+    );
+  }
+
+  InputBorder _buildErrorBorder(BuildContext context) {
+    return OutlineInputBorder(
+      borderSide: const BorderSide(width: 2.0, color: Colors.red),
       borderRadius: BorderRadius.circular(8.0),
     );
   }

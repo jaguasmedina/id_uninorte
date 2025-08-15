@@ -6,10 +6,10 @@ class RoutingErrorWidget extends StatelessWidget {
   final String message;
 
   const RoutingErrorWidget({
-    Key key,
-    @required this.title,
-    @required this.subtitle,
-    @required this.message,
+    Key? key,
+    required this.title,
+    required this.subtitle,
+    required this.message,
   }) : super(key: key);
 
   @override
@@ -25,19 +25,19 @@ class RoutingErrorWidget extends StatelessWidget {
                 Text(
                   title,
                   textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.headline6,
+                  style: Theme.of(context).textTheme.headlineMedium,
                 ),
                 const SizedBox(height: 12.0),
                 Text(
                   subtitle,
                   textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.subtitle1,
+                  style: Theme.of(context).textTheme.titleMedium,
                 ),
                 const SizedBox(height: 12.0),
                 Text(
                   message,
                   textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.bodyText2,
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
               ],
             ),

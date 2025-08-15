@@ -6,7 +6,7 @@ import 'package:identidaddigital/core/presentation/widgets/widgets.dart';
 import 'package:identidaddigital/core/utils/app_market.dart';
 
 class UpdateRequiredPage extends StatelessWidget {
-  const UpdateRequiredPage({Key key}) : super(key: key);
+  const UpdateRequiredPage({Key? key}) : super(key: key);
 
   /// Anonymous route for [UpdateRequiredPage].
   static Route<void> route() {
@@ -28,7 +28,7 @@ class UpdateRequiredPage extends StatelessWidget {
                   children: <Widget>[
                     Icon(
                       Icons.update_rounded,
-                      color: Theme.of(context).accentColor,
+                      color: Theme.of(context).colorScheme.secondary,
                       size: 100.0,
                     ),
                     const SizedBox(height: 22.0, width: double.infinity),

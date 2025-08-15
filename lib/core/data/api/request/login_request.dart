@@ -8,8 +8,8 @@ class LoginRequest extends Equatable {
   final DeviceModel device;
 
   const LoginRequest({
-    @required this.credentials,
-    @required this.device,
+    required this.credentials,
+    required this.device,
   });
 
   Map<String, dynamic> toMap() {

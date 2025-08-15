@@ -1,5 +1,4 @@
 import 'package:injectable/injectable.dart';
-import 'package:meta/meta.dart';
 import 'package:dartz/dartz.dart';
 
 import 'package:identidaddigital/core/data/api/services/faqs_service/faqs_service.dart';
@@ -13,7 +12,7 @@ class FaqsRepositoryImpl extends Repository implements FaqsRepository {
   final FaqsService faqsService;
 
   FaqsRepositoryImpl({
-    @required this.faqsService,
+    required this.faqsService,
   });
 
   @override

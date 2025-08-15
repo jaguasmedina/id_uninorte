@@ -45,8 +45,8 @@ class ApiClientImpl extends ApiClient {
   @override
   Future<ApiResponse<T>> getUrl<T>(
     String path, {
-    Map<String, String> queryParameters,
-    Map<String, String> headers,
+    Map<String, String>? queryParameters,
+    Map<String, String>? headers,
   }) async {
     final requestHeaders = applyHeaders(headers, defaultHeaders);
     final uri = Uri.parse(baseUrl).replace(
@@ -68,9 +68,9 @@ class ApiClientImpl extends ApiClient {
   @override
   Future<ApiResponse<T>> post<T>(
     String path, {
-    Map<String, String> queryParameters,
-    Map<String, String> headers,
-    Map<String, dynamic> body,
+    Map<String, String>? queryParameters,
+    Map<String, String>? headers,
+    Map<String, dynamic>? body,
   }) async {
     final requestHeaders = applyHeaders(headers, postDefaultHeaders);
     final uri = Uri.parse(baseUrl).replace(
@@ -97,7 +97,7 @@ class ApiClientImpl extends ApiClient {
   ///
   /// Overrides the key-value if already exist.
   Map<String, String> applyHeaders(
-    Map<String, String> headers,
+    Map<String, String>? headers,
     Map<String, String> appliedHeaders,
   ) {
     if (headers != null) {

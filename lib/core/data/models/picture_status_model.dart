@@ -8,8 +8,8 @@ class PictureStatusModel extends PictureStatus {
 
   factory PictureStatusModel.fromMap(Map map) {
     return PictureStatusModel(
-      map['state'],
-      map['message'],
+      map['state'] ?? '',
+      map['message'] ?? '',
     );
   }
 }

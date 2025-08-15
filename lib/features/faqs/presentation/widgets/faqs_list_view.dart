@@ -6,11 +6,11 @@ import 'package:identidaddigital/features/faqs/presentation/widgets/faqs_empty_v
 
 class FaqsListView extends StatelessWidget {
   final List<Faq> faqs;
-  final VoidCallback onRetry;
+  final VoidCallback? onRetry;
 
   const FaqsListView({
-    Key key,
-    @required this.faqs,
+    Key? key,
+    required this.faqs,
     this.onRetry,
   }) : super(key: key);
 
@@ -29,7 +29,7 @@ class FaqsListView extends StatelessWidget {
       return FaqsEmptyView(
         title: getString(context, 'faqs_empty_title'),
         subtitle: getString(context, 'faqs_empty_subtitle'),
-        onTap: onRetry,
+        onTap: onRetry ?? () {},
       );
     }
   }

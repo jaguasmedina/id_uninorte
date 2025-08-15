@@ -69,7 +69,7 @@ class ProfileServiceImpl implements ProfileService {
   Future<void> changePasswordForExternalUser(
     AuthCredentialsModel credentials,
   ) async {
-    final response = await client.post<Map>(
+    final response = await client.post<dynamic>(
       ApiRoutes.changePasswordForExternalUser,
       body: credentials.toMap(),
     );
@@ -80,10 +80,16 @@ class ProfileServiceImpl implements ProfileService {
 
   @override
   Future<void> sendMessageToContactCenter(MessageModel message) async {
-    final response = await client.post<Map>(
+    final response = await client.post<dynamic>(
       ApiRoutes.sendRequestCard,
       body: message.toMap(),
     );
+
+    // Manejar respuesta nula del servidor (caso exitoso)
+    if (response.data == null && response.isSuccessful) {
+      return; // Mensaje enviado exitosamente
+    }
+
     if (response.status.code == -1) {
       throw EmailNotFoundException();
     }

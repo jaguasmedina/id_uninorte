@@ -6,10 +6,10 @@ import 'package:identidaddigital/core/utils/my_icons.dart';
 import 'package:identidaddigital/features/onboarding/presentation/widgets/widgets.dart';
 
 class ConfigurationSlide extends StatelessWidget {
-  final VoidCallback onStart;
+  final VoidCallback? onStart;
 
   const ConfigurationSlide({
-    Key key,
+    Key? key,
     this.onStart,
   }) : super(key: key);
 
@@ -19,27 +19,27 @@ class ConfigurationSlide extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 36.0, vertical: 16.0),
       child: Column(
         children: <Widget>[
-          Expanded(
+          const Expanded(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 Column(
-                  children: const <Widget>[
+                  children: <Widget>[
                     Icon(MyIcons.settings, size: 34.0),
                     SizedBox(height: 14.0),
                     BodyText('Configuración de la app'),
                   ],
                 ),
-                const Icon(MyIcons.fingerprint, size: 94.0),
-                const BodyRichText(
+                Icon(MyIcons.fingerprint, size: 94.0),
+                BodyRichText(
                   children: [
                     TextSpan(text: 'Activa el acceso con '),
                     BoldTextSpan(text: 'biometría'),
                     TextSpan(text: '\npara un ingreso fácil y seguro.'),
                   ],
                 ),
-                const Icon(MyIcons.deviceClose, size: 94.0),
-                const BodyRichText(
+                Icon(MyIcons.deviceClose, size: 94.0),
+                BodyRichText(
                   children: [
                     BoldTextSpan(text: 'Desvincula'),
                     TextSpan(

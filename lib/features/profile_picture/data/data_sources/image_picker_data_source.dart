@@ -40,6 +40,6 @@ class ImagePickerDataSourceImpl implements ImagePickerDataSource {
       maxWidth: maxSize,
       maxHeight: maxSize,
     );
-    return File(pickedFile.path);
+    return File(pickedFile?.path ?? '');
   }
 }
