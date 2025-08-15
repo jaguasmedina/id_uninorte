@@ -8,6 +8,7 @@ import 'package:identidaddigital/core/i18n/app_localizations.dart';
 import 'package:identidaddigital/core/navigation/app_navigator.dart';
 import 'package:identidaddigital/core/presentation/providers/providers.dart';
 import 'package:identidaddigital/core/utils/colors.dart';
+import 'package:identidaddigital/core/utils/dialog_manager.dart';
 import 'package:identidaddigital/di/injection.dart';
 import 'package:identidaddigital/features/auth/presentation/pages/login_page.dart';
 import 'package:identidaddigital/features/digital_card/constants/tags.dart';
@@ -47,6 +48,7 @@ class _DigitalCardPageState extends State<DigitalCardPage>
       _requestNotificationPermission();
     });
     _bloc.turnOnScreenBrightness();
+    _listenToSessionChanges();
     // screenshotCallback.addListener(() {
     //   final userProvider = Provider.of<UserProvider>(context, listen: false);
     //   _bloc.regenerateQR(userProvider.user!);
@@ -142,6 +144,39 @@ class _DigitalCardPageState extends State<DigitalCardPage>
     if (!_isFrontSideFocused) {
       _startAccessCodeGeneration();
     }
+  }
+
+  void _listenToSessionChanges() {
+    _bloc.sessionStream.listen((result) {
+      result.fold(
+        (failure) {
+          if (failure is PermissionNotFoundFailure) {
+            final localizations = AppLocalizations.of(context);
+            DialogManager.showMessage(
+              context: context,
+              title: localizations.translate('session_expired'),
+              message: localizations.translate('session_expired_error_message'),
+              buttonText: localizations.translate('ok'),
+            ).then((_) {
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                Destinations.login,
+                (route) => false,
+                arguments: LoginReason(
+                  localizations.translate('session_expired'),
+                  localizations.translate('session_expired_error_message'),
+                ),
+              );
+            });
+          }
+        },
+        (user) {
+          // Sesión válida, actualizar usuario si es necesario
+          final userProvider =
+              Provider.of<UserProvider>(context, listen: false);
+          userProvider.user = user;
+        },
+      );
+    });
   }
 
   @override

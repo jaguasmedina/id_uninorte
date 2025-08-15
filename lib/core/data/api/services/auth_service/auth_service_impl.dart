@@ -24,33 +24,38 @@ class AuthServiceImpl implements AuthService {
 
   @override
   Future<Tuple2<UserModel, String>> login(LoginRequest request) async {
-    final ApiResponse<Map> response = await client.post(
-      ApiRoutes.login,
-      body: request.toMap(),
-    );
-    if (response.status.code == -1) {
-      ///Get Token to Unlink Device
-      final ApiResponse<Map> response = await client.post(
-        ApiRoutes.loginPortal,
+    try {
+      final ApiResponse<dynamic> response = await client.post(
+        ApiRoutes.login,
         body: request.toMap(),
       );
 
-      ///Set Email for Unlink Device
-      preferences.userEmail = request.credentials.username ?? '';
-      preferences.authToken = response.data['access_token'];
+      if (response.status.code == -1) {
+        ///Get Token to Unlink Device
+        final ApiResponse<dynamic> response = await client.post(
+          ApiRoutes.loginPortal,
+          body: request.toMap(),
+        );
 
-      throw DeviceAlreadyInUseException();
-    } else if (response.status.code == 401) {
-      throw NotAuthorizedException();
-    } else if (response.status.code == -2) {
-      throw AuthRequestException();
-    } else if (response.isSuccessful) {
-      final String accessToken = response.data['access_token'];
-      final userModel =
-          UserModel.fromMap(Map<String, dynamic>.from(response.data));
-      return tuple2(userModel, accessToken);
-    } else {
-      throw ServerException();
+        ///Set Email for Unlink Device
+        preferences.userEmail = request.credentials.username ?? '';
+        preferences.authToken = response.data['access_token'];
+
+        throw DeviceAlreadyInUseException();
+      } else if (response.status.code == 401) {
+        throw NotAuthorizedException();
+      } else if (response.status.code == -2) {
+        throw AuthRequestException();
+      } else if (response.isSuccessful) {
+        final String accessToken = response.data['access_token'];
+        final userModel =
+            UserModel.fromMap(Map<String, dynamic>.from(response.data));
+        return tuple2(userModel, accessToken);
+      } else {
+        throw ServerException();
+      }
+    } catch (e) {
+      rethrow;
     }
   }
 }

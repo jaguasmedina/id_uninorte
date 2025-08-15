@@ -73,16 +73,19 @@ class ApiClientImpl extends ApiClient {
     Map<String, dynamic>? body,
   }) async {
     final requestHeaders = applyHeaders(headers, postDefaultHeaders);
+
     final uri = Uri.parse(baseUrl).replace(
       path: path,
       queryParameters: queryParameters,
     );
+
     final response = await _client.post(
       uri,
       headers: requestHeaders,
       body: json.encode(body),
     );
-    return onResponse(response);
+
+    return onResponse<T>(response);
   }
 
   @override

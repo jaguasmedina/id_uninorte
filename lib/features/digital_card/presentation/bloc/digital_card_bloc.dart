@@ -18,12 +18,14 @@ import 'package:identidaddigital/features/digital_card/domain/repositories/digit
 class DigitalCardBloc extends BaseBloc {
   Timer? _qrTimer;
   Timer? _clockTimer;
+  Timer? _sessionCheckTimer;
   final DigitalCardRepository _digitalCardRepository;
   final UserPermissionRepository _permissionRepository;
   final RemoteConfigRepository _remoteConfigRepository;
   final ScreenBrightness _screenBrightness;
 
   final _qrController = BehaviorSubject<String>();
+  final _sessionController = BehaviorSubject<Either<Failure, User>>();
 
   final _clockController = StreamController<String>.broadcast();
   bool qrGenerationPaused = false;
@@ -35,9 +37,11 @@ class DigitalCardBloc extends BaseBloc {
     this._screenBrightness,
   ) {
     _createPeriodicClockTicker();
+    _createPeriodicSessionCheck();
   }
 
   Stream<String> get qrStream => _qrController.stream;
+  Stream<Either<Failure, User>> get sessionStream => _sessionController.stream;
   Stream<String> get clockStream => _clockController.stream;
 
   Future<void> startAccessCodeGeneration(User user) async {
@@ -68,6 +72,16 @@ class DigitalCardBloc extends BaseBloc {
       const Duration(seconds: 1),
       (timer) {
         _tickClock();
+      },
+    );
+  }
+
+  void _createPeriodicSessionCheck() {
+    _sessionCheckTimer = Timer.periodic(
+      const Duration(seconds: 30), // Verificar cada 30 segundos
+      (timer) async {
+        final result = await updateUserPermission();
+        _sessionController.sink.add(result);
       },
     );
   }
@@ -107,7 +121,9 @@ class DigitalCardBloc extends BaseBloc {
   void dispose() {
     _qrTimer?.cancel();
     _clockTimer?.cancel();
+    _sessionCheckTimer?.cancel();
     _qrController.close();
+    _sessionController.close();
     _clockController.close();
     super.dispose();
   }

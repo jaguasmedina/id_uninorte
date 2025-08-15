@@ -61,8 +61,17 @@ class LoginRepositoryImpl extends Repository implements LoginRepository {
       final userModel = data.value1;
       final authToken = data.value2;
       preferences.user = userModel;
-
       preferences.authToken = authToken;
+
+      // Guardar el email del usuario para uso posterior (desvincular dispositivo)
+      final userEmail = userModel.currentEmail ??
+          userModel.emailUN ??
+          userModel.emailExt ??
+          '';
+      if (userEmail.isNotEmpty) {
+        preferences.userEmail = userEmail;
+      }
+
       if (!userModel.hasPermission) {
         return Left(PermissionNotFoundFailure());
       }

@@ -28,9 +28,9 @@ class NetworkInfoDataSourceImpl implements NetworkInfoDataSource {
 
   @override
   Future<void> ensureConnection() async {
-    final connected = await isConnected;
-    if (!connected) {
-      throw NetworkException();
-    }
+    // final connected = await isConnected;
+    // if (!connected) {
+    //   throw NetworkException();
+    // }
   }
 }

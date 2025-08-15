@@ -61,8 +61,15 @@ class SettingsRepositoryImpl extends Repository implements SettingsRepository {
     return runCatching(() async {
       try {
         await networkInfo.ensureConnection();
+
         final email =
             preferences.userEmail ?? preferences.user?.currentEmail ?? '';
+
+        if (email.isEmpty) {
+          throw ServerException(
+              'No se encontró el email del usuario para desvincular el dispositivo');
+        }
+
         await deviceService.unlinkDevice(email);
         await secureStorage.deleteCredentials();
         await logout();
@@ -71,6 +78,15 @@ class SettingsRepositoryImpl extends Repository implements SettingsRepository {
         await secureStorage.deleteCredentials();
         await logout();
         return Left(e.toFailure());
+      } on SessionExpiredException catch (e) {
+        await secureStorage.deleteCredentials();
+        await logout();
+        return Left(e.toFailure());
+      } on ServerException catch (e) {
+        return Left(e.toFailure());
+      } catch (e) {
+        return Left(ServerFailure(
+            'Error inesperado al desvincular el dispositivo: ${e.toString()}'));
       }
     });
   }
@@ -80,7 +96,7 @@ class SettingsRepositoryImpl extends Repository implements SettingsRepository {
     return preferences.clearUserData();
   }
 
-    @override
+  @override
   Future<Either<Failure, Unit>> sendMessage(Message message) {
     return runCatching(() async {
       await networkInfo.ensureConnection();

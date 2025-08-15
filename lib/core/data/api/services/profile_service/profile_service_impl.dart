@@ -20,7 +20,7 @@ class ProfileServiceImpl implements ProfileService {
 
   @override
   Future<PictureStatusModel> requestPictureStatus(String document) async {
-    final response = await client.post<Map>(
+    final response = await client.post<dynamic>(
       ApiRoutes.photoStates,
       body: <String, String>{'code': document},
     );
@@ -36,7 +36,7 @@ class ProfileServiceImpl implements ProfileService {
     String id,
     String email,
   ) async {
-    final response = await client.getUrl<Map>(
+    final response = await client.getUrl<dynamic>(
       ApiRoutes.getUserPermission,
       queryParameters: {
         'code': id,
@@ -57,7 +57,7 @@ class ProfileServiceImpl implements ProfileService {
     final multipartFile = await image.toMultipartFile('image');
     request.fields['code'] = userId;
     request.files.add(multipartFile);
-    final response = await client.send<Map>(request);
+    final response = await client.send<dynamic>(request);
     if (response.isSuccessful) {
       return;
     } else {
